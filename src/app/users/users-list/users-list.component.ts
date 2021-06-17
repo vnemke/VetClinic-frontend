@@ -1,5 +1,7 @@
 import { HttpClient } from '@angular/common/http';
+import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
+import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../api.service';
 import { User } from '../User'
@@ -13,7 +15,12 @@ export class UsersListComponent implements OnInit {
 
   users: User[] = []  
   url: string = "/api/users"
-  
+  @ViewChild('dt1') dt: Table | undefined;
+
+  applyFilterGlobal($event: any, stringVal: any) {
+    this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
+  }
+
   constructor(private api: ApiService) { }
 
   ngOnInit(): void {
@@ -25,5 +32,4 @@ export class UsersListComponent implements OnInit {
       }   
     )
   }
-  
 }

@@ -1,3 +1,35 @@
-<h1 *ngFor="let user of users">
-    {{user.username}}
-</h1>
+<p-table #dt1 [value]="users" dataKey="username"
+    [globalFilterFields]="['username','email','firstName','lastName']">
+    <ng-template pTemplate="caption">
+        <div class="p-d-flex">
+            <span class="p-input-icon-left p-ml-auto">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword"/>
+            </span>
+        </div>
+    </ng-template>
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width: 3rem"></th>
+            <th pSortableColumn="username">Username<p-sortIcon field="username"></p-sortIcon></th>
+            <th >Email</th>
+            <th >First Name</th>
+            <th >Last Name</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user let-expanded="expanded">
+        <tr>
+            <td>
+                <button type="button" pButton pRipple [pRowToggler]="user" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+            </td>
+            <td>{{user.username}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="rowexpansion" let-user>
+       
+    </ng-template>
+</p-table>
+

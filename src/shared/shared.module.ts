@@ -1,10 +1,12 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { NgModule } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { HttpClientModule } from '@angular/common/http'
 
 import { ButtonModule } from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext'
-import { FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms'
+import { TableModule } from 'primeng/table'
+
 
 @NgModule({
 	declarations: [],
@@ -13,14 +15,16 @@ import { FormsModule } from '@angular/forms';
 		HttpClientModule,
         ButtonModule,
         InputTextModule,
-        FormsModule
+        FormsModule,
+        TableModule
 	],
 	exports: [
 		CommonModule, 
 		HttpClientModule,
         ButtonModule,
         InputTextModule,
-        FormsModule
+        FormsModule,
+        TableModule
 	]
 })
 export class SharedModule { }
