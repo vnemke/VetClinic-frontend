@@ -4,7 +4,7 @@
         <div class="p-d-flex">
             <span class="p-input-icon-left p-ml-auto">
                 <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword"/>
+                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
             </span>
         </div>
     </ng-template>
@@ -29,7 +29,7 @@
         </tr>
     </ng-template>
     <ng-template pTemplate="rowexpansion" let-user>
-       
+       <app-edit-user [editUser]="user" (editedUser)="onEditedUser($event)"></app-edit-user>
     </ng-template>
 </p-table>
 

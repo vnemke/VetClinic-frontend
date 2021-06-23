@@ -17,7 +17,7 @@ export class ApiService {
 		return this.http.post<T>(url, body)
 	}
 
-	put<T>(url: string, body: Object): Observable<T> {
+	update<T>(url: string, body: T): Observable<T> {
 		return this.http.put<T>(url, body)
 	}
 
