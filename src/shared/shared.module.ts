@@ -10,8 +10,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { TableModule } from 'primeng/table';
 import { MatSelectModule } from '@angular/material/select';
-
-
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 
 @NgModule({
 	declarations: [],
@@ -26,7 +25,8 @@ import { MatSelectModule } from '@angular/material/select';
 		MatInputModule,
 		MatButtonModule,
 		MatFormFieldModule,
-		MatSelectModule
+		MatSelectModule,
+		
 	],
 	exports: [
 		CommonModule, 
@@ -39,7 +39,9 @@ import { MatSelectModule } from '@angular/material/select';
 		MatInputModule,
 		MatButtonModule,
 		MatFormFieldModule,
-		MatSelectModule
-	]
+		MatSelectModule,
+		
+	],
+	providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}]
 })
 export class SharedModule { }

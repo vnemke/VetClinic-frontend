@@ -1,4 +1,4 @@
-<form [formGroup]="myForm" (ngSubmit)="onEditUser()">
+<form [formGroup]="myForm">
     <br>
     <mat-form-field appearance="fill" >
         <mat-label>Username</mat-label>
@@ -28,7 +28,8 @@
 		</mat-select>
 	</mat-form-field>
     <br> 
-    <button mat-button type="submit">Edit</button>
-    <!-- <button mat-button color="warn" >Delete</button> -->
+    <button mat-button (click)="onEditUser()">Edit</button>
+    <button mat-button color="warn" (click)="deleteUserModal(editUser)">Delete</button>
+    
 </form>
 

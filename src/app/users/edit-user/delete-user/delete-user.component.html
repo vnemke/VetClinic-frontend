@@ -1,0 +1,11 @@
+<div style="width:300px">
+    <h1 mat-dialog-title>Do you want to delete {{editUser.username}}?</h1>
+    
+    <div mat-dialog-actions align="end">
+        <span>
+            <!-- <button type="button" mat-flat-button color="primary" (click)="onDeleteUser()" >Delete</button> -->
+            <button type="button" mat-flat-button color="primary"  (click)="onDeleteUser()" >Delete</button>
+            <button type="button" mat-stroked-button color="primary" (click)="CloseDialog()">Cancel</button>
+        </span>
+    </div>
+</div>
