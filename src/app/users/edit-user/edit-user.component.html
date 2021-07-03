@@ -2,11 +2,11 @@
     <br>
     <mat-form-field appearance="fill" >
         <mat-label>Username</mat-label>
-        <input matInput formControlName="username">
-        <mat-error *ngIf="myForm.invalid">enter username</mat-error>  
+        <input matInput formControlName="username" >
+        <!-- <mat-error *ngIf="myForm.invalid">enter username</mat-error>   -->
     </mat-form-field>
     <br>
-    <mat-form-field appearance="fill" >
+    <mat-form-field appearance="fill">
         <mat-label>Email</mat-label>
         <input matInput formControlName="email">
     </mat-form-field>
@@ -29,7 +29,6 @@
 	</mat-form-field>
     <br> 
     <button mat-button (click)="onEditUser()">Edit</button>
-    <button mat-button color="warn" (click)="deleteUserModal(editUser)">Delete</button>
-    
+    <button mat-button color="warn" (click)="deleteUserModal(user)">Delete</button>
 </form>
 

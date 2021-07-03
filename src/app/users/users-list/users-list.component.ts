@@ -6,7 +6,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
 import { Observable } from 'rxjs';
 import { ApiService } from '../../api.service';
-import { User } from '../User'
+import { User } from '../User';
+import { Role } from '../Role';
 
 
 @Component({
@@ -16,7 +17,8 @@ import { User } from '../User'
 })
 export class UsersListComponent implements OnInit {
 
-  users: User[] = []  
+  users: User[] = [];
+  roles: Role[] = [];
   url: string = "/api/users"
   
   @ViewChild('dt1') dt: Table | undefined;
@@ -24,29 +26,25 @@ export class UsersListComponent implements OnInit {
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
+  // search logic ngprime 
 
-  constructor(private api: ApiService, private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
    this.users = this.route.snapshot.data.users;
+   this.roles = this.route.snapshot.data.roles
    console.log(this.route.snapshot);
-   
-    
-    this.api.get<User[]>(this.url)
-    .subscribe(
-      res => { 
-        this.users = res
-      }   
-    )
   }
 
   onEditedUser(user: User): void {
     var res = this.users.findIndex(u => u.id == user.id);
     this.users[res] = user
   }
+  // replacing old user with new edited user 
 
   onDeletedUser(user: User): void {
     var res = this.users.findIndex(u => u.id == user.id);
     this.users.splice(res, 1);
   }  
+  // deleting user and make new array
 }

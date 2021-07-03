@@ -8,11 +8,11 @@ import { User } from '../../User';
   styleUrls: ['./delete-user.component.scss']
 })
 export class DeleteUserComponent implements OnInit {
-  @Input() editUser: User;
+  @Input() user: User;
   
   constructor(private _mdr: MatDialogRef<DeleteUserComponent>, 
     @Inject(MAT_DIALOG_DATA) public data: any) {
-    this.editUser = data.editUser
+    this.user = data.user
   }
 
   ngOnInit(): void {}

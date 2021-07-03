@@ -6,6 +6,7 @@ import { Role } from '../Role';
 import { User } from '../User';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
+import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-edit-user',
@@ -15,50 +16,70 @@ import { DeleteUserComponent } from './delete-user/delete-user.component';
 export class EditUserComponent implements OnInit {
 
   users: User[] = [];
-  @Input() editUser: User;
+  @Input() user: User;
   @Output() editedUser: EventEmitter<User> = new EventEmitter();
   @Output() deletedUser: EventEmitter<User> = new EventEmitter();
   roles: Role[] = [];
   myForm: FormGroup;
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private fb: FormBuilder, private api: ApiService, public route: ActivatedRoute,
-    private matDialog: MatDialog) { }
+    private matDialog: MatDialog, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    this.roles = this.route.snapshot.data.roles
-    this.users = this.route.snapshot.data.users    
+    this.roles = this.route.snapshot.data.roles;
+    this.users = this.route.snapshot.data.users;       
     
     this.myForm = this.fb.group({
-      username: [this.editUser.username, [Validators.required, Validators.minLength(3)]],
-      email: [this.editUser.email],
-      firstName: [this.editUser.firstName],
-      lastName: [this.editUser.lastName],
-      roleId: [this.editUser.roleId]
-    })
+      username: {value: this.user.username, disabled: true},
+      email: {value: this.user.email, disabled: true },
+      firstName: this.user.firstName,
+      lastName: this.user.lastName,
+      roleId: this.user.roleId
+    });
   }
 
-  onEditUser(): void {
-    var formValue = {...this.myForm.value, id: this.editUser.id}
+  onEditUser() {
+    var roleVelue = this.myForm.value.roleId;
+    var index = this.roles.findIndex(r => r.id == roleVelue);
+    var role = this.roles[index];
+    // declaring user role
+
+    this.user.role = role;
+   
+    var formValue = {...this.myForm.value, id: this.user.id, username: this.user.username, email: this.user.email}
+    var editUser = {...this.user,...formValue}
+    console.log('form', formValue);
     
-    this.api.update("/api/users/" + this.editUser.id, formValue)
+    // user values from form
+
+    this.api.update("/api/users/" + this.user.id, formValue)
     .subscribe(
-      res => {
-        this.editedUser.emit(res); 
-        console.log(res);
+      () => {
+        this.editedUser.emit(editUser); 
+        console.log(editUser);
+        this._snackBar.open(this.user.username + ' is edited', 'End now', {
+					duration: 5000,
+					verticalPosition: this.verticalPosition
+				});
       }   
     )
   }
 
-  deleteUserModal(user: User) {
+  deleteUserModal(modalUser: User) {
     const dailogDeleteUser = this.matDialog.open(DeleteUserComponent, {
-      data: { editUser: user }  
+      data: { user: modalUser }  
     });
     dailogDeleteUser.afterClosed().subscribe(res => {
       console.log(res);
       if(res) {
-        this.api.delete("/api/users/" + this.editUser.id)
+        this.api.delete("/api/users/" + this.user.id)
         .subscribe(()=> {
-          this.deletedUser.emit(this.editUser);
+          this.deletedUser.emit(this.user);
+          this._snackBar.open(this.user.username + 'is deleted' , 'End now', {
+            duration: 5000,
+            verticalPosition: this.verticalPosition
+          });
         })
       }
     });

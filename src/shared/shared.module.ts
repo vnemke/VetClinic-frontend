@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { TableModule } from 'primeng/table';
 import { MatSelectModule } from '@angular/material/select';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
 	declarations: [],
@@ -26,7 +27,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 		MatButtonModule,
 		MatFormFieldModule,
 		MatSelectModule,
-		
+		MatSnackBarModule,
 	],
 	exports: [
 		CommonModule, 
@@ -40,7 +41,7 @@ import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 		MatButtonModule,
 		MatFormFieldModule,
 		MatSelectModule,
-		
+		MatSnackBarModule,
 	],
 	providers: [{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}]
 })
