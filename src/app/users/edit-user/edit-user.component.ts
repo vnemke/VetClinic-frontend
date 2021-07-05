@@ -5,8 +5,8 @@ import { ApiService } from 'src/app/api.service';
 import { Role } from '../Role';
 import { User } from '../User';
 import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
+import { ModalComponent } from '../../modal/modal.component';
 
 @Component({
   selector: 'app-edit-user',
@@ -14,7 +14,6 @@ import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snac
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-
   users: User[] = [];
   @Input() user: User;
   @Output() editedUser: EventEmitter<User> = new EventEmitter();
@@ -44,13 +43,11 @@ export class EditUserComponent implements OnInit {
     var index = this.roles.findIndex(r => r.id == roleVelue);
     var role = this.roles[index];
     // declaring user role
-
     this.user.role = role;
    
     var formValue = {...this.myForm.value, id: this.user.id, username: this.user.username, email: this.user.email}
     var editUser = {...this.user,...formValue}
     console.log('form', formValue);
-    
     // user values from form
 
     this.api.update("/api/users/" + this.user.id, formValue)
@@ -66,9 +63,9 @@ export class EditUserComponent implements OnInit {
     )
   }
 
-  deleteUserModal(modalUser: User) {
-    const dailogDeleteUser = this.matDialog.open(DeleteUserComponent, {
-      data: { user: modalUser }  
+  deleteUserModal(modalData: User) {
+    const dailogDeleteUser = this.matDialog.open(ModalComponent, {
+      data: { user: modalData, message: 'Do you want to delete ' + this.user.username }  
     });
     dailogDeleteUser.afterClosed().subscribe(res => {
       console.log(res);
@@ -76,7 +73,7 @@ export class EditUserComponent implements OnInit {
         this.api.delete("/api/users/" + this.user.id)
         .subscribe(()=> {
           this.deletedUser.emit(this.user);
-          this._snackBar.open(this.user.username + 'is deleted' , 'End now', {
+          this._snackBar.open(this.user.username + ' is deleted', 'End now', {
             duration: 5000,
             verticalPosition: this.verticalPosition
           });
@@ -84,5 +81,4 @@ export class EditUserComponent implements OnInit {
       }
     });
   }
- 
 }

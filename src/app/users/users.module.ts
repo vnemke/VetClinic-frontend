@@ -6,11 +6,6 @@ import { SharedModule } from '../../shared/shared.module';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { getAllRoles } from './roles.resolver';
 import { getAllUsers } from './users.resolver';
-import { DeleteUserComponent } from './edit-user/delete-user/delete-user.component';
-import { MatDialogModule } from '@angular/material/dialog';
-
-
-
 
 const routes: Routes = [
     {
@@ -28,22 +23,20 @@ const routes: Routes = [
             users: getAllUsers,
             roles: getAllRoles
         }
-    },
+    }
 ]
 
 @NgModule({
 	declarations: [
 		UsersListComponent,
         NewUserComponent,
-        EditUserComponent,
-        DeleteUserComponent
-	],
+        EditUserComponent	
+    ],
 	imports: [
 		RouterModule.forChild(routes),
-        SharedModule,
-        MatDialogModule
+        SharedModule
 	],
-    providers: [getAllRoles],
-    entryComponents: [DeleteUserComponent]
+    providers: [getAllRoles]
 })
+
 export class UsersModule {}
