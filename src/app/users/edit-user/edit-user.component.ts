@@ -63,9 +63,9 @@ export class EditUserComponent implements OnInit {
     )
   }
 
-  deleteUserModal(modalData: User) {
+  deleteUserModal(modalUser: User) {
     const dailogDeleteUser = this.matDialog.open(ModalComponent, {
-      data: { user: modalData, message: 'Do you want to delete ' + this.user.username }  
+      data: { user: modalUser, message: 'Do you want to delete ' + modalUser.username }  
     });
     dailogDeleteUser.afterClosed().subscribe(res => {
       console.log(res);
@@ -73,7 +73,7 @@ export class EditUserComponent implements OnInit {
         this.api.delete("/api/users/" + this.user.id)
         .subscribe(()=> {
           this.deletedUser.emit(this.user);
-          this._snackBar.open(this.user.username + ' is deleted', 'End now', {
+          this._snackBar.open(modalUser.username + ' is deleted', 'End now', {
             duration: 5000,
             verticalPosition: this.verticalPosition
           });

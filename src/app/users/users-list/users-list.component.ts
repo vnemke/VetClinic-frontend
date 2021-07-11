@@ -20,13 +20,14 @@ export class UsersListComponent implements OnInit {
   users: User[] = [];
   roles: Role[] = [];
   url: string = "/api/users"
-  
-  @ViewChild('dt1') dt: Table | undefined;
+  @ViewChild('dt1') dt: Table;
+
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
   // search logic ngprime 
+
 
   constructor(private route: ActivatedRoute) { }
 
@@ -34,6 +35,8 @@ export class UsersListComponent implements OnInit {
    this.users = this.route.snapshot.data.users;
    this.roles = this.route.snapshot.data.roles
    console.log(this.route.snapshot);
+   console.log(this.users);
+   
   }
 
   onEditedUser(user: User): void {

@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit, Input } from '@angular/core';
+import { Component, Inject, OnInit, Input, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA,  } from "@angular/material/dialog";
-import { User } from '../users/User';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-modal',

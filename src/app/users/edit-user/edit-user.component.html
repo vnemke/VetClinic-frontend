@@ -1,34 +1,50 @@
-<form [formGroup]="myForm">
-    <br>
-    <mat-form-field appearance="fill" >
-        <mat-label>Username</mat-label>
-        <input matInput formControlName="username" >
-        <!-- <mat-error *ngIf="myForm.invalid">enter username</mat-error>   -->
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input matInput formControlName="email">
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="fill" >
-        <mat-label>First Name</mat-label>
-        <input matInput formControlName="firstName">
-    </mat-form-field>
-    <br>
-    <mat-form-field appearance="fill" >
-        <mat-label>Last Name</mat-label>
-        <input matInput formControlName="lastName">
-    </mat-form-field>
-    <br>
-    <mat-form-field>
-		<mat-label>Role</mat-label>
-		<mat-select formControlName="roleId"> 
-			<mat-option *ngFor="let role of roles" [(value)]="role.id">{{role.name}}</mat-option>
-		</mat-select>
-	</mat-form-field>
-    <br> 
-    <button mat-button (click)="onEditUser()">Edit</button>
-    <button mat-button color="warn" (click)="deleteUserModal(user)">Delete</button>
-</form>
+<form [formGroup]="myForm" class="myForm">
 
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <mat-form-field appearance="fill">
+                <mat-label>Username</mat-label>
+                <input matInput formControlName="username">
+            </mat-form-field>
+        </div>
+        <div class="col-auto">
+            <mat-form-field appearance="fill">
+                <mat-label>Email</mat-label>
+                <input matInput formControlName="email">
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <mat-form-field appearance="fill">
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName" >
+            </mat-form-field>
+        </div>
+        <div class="col-auto">
+            <mat-form-field appearance="fill">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+            </mat-form-field>
+        </div>
+    </div>
+    
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <mat-form-field class="option">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="roleId">
+                    <mat-option *ngFor="let role of roles" [(value)]="role.id">{{role.name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>    
+    <br>
+    <div class="row justify-content-center">    
+        <div class="col-auto">
+            <button mat-button (click)="onEditUser()">Edit</button>
+            <button mat-button color="warn" (click)="deleteUserModal(user)">Delete</button>
+        </div>
+    </div>    
+</form>
