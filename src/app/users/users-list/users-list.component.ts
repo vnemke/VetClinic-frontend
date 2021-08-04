@@ -1,11 +1,8 @@
-import { HttpClient } from '@angular/common/http';
-import { splitClasses } from '@angular/compiler';
+
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Table } from 'primeng/table';
-import { Observable } from 'rxjs';
-import { ApiService } from '../../api.service';
 import { User } from '../User';
 import { Role } from '../Role';
 
@@ -42,6 +39,8 @@ export class UsersListComponent implements OnInit {
   onEditedUser(user: User): void {
     var res = this.users.findIndex(u => u.id == user.id);
     this.users[res] = user
+    // console.log('list',user);
+    
   }
   // replacing old user with new edited user 
 

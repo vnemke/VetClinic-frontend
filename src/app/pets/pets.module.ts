@@ -6,6 +6,9 @@ import { PetsResolver } from './pets.resolver';
 import { AnimalsResolver } from './animals.resolver';
 import { OwnersResolver } from './owners.resolver';
 import { RacesResolver } from './races.resolver';
+import { NewPetComponent } from './new-pet/new-pet.component';
+import { EditPetComponent } from './edit-pet/edit-pet.component';
+import { PetResolver } from './pet.resolver';
 
 const routes: Routes = [
   {
@@ -17,12 +20,35 @@ const routes: Routes = [
       owners: OwnersResolver,
       races: RacesResolver
     }
+  },
+  {
+    path: 'add',
+    component: NewPetComponent,
+    resolve: {
+      pets: PetsResolver,
+      animals: AnimalsResolver,
+      owners: OwnersResolver,
+      races: RacesResolver
+    }
+  },
+  {
+    path: ':id',
+    component: EditPetComponent,
+    resolve: {
+      pets: PetsResolver,
+      pet: PetResolver,
+      animals: AnimalsResolver,
+      owners: OwnersResolver,
+      races: RacesResolver
+    }
   }
-]
+];
 
 @NgModule({
   declarations: [
-    PetsListComponent
+    PetsListComponent,
+    NewPetComponent,
+    EditPetComponent
   ],
   imports: [
     RouterModule.forChild(routes),

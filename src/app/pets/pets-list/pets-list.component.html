@@ -1,11 +1,14 @@
 <p-table #dt1 [value]="pets" dataKey="name"
-    [globalFilterFields]="['name','sex','year']">
+    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"  styleClass="p-datatable-customers "
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    [globalFilterFields]="['name','sex','year', 'race.name']">
     <ng-template pTemplate="caption">
         <div class="p-d-flex">
             <span class="p-input-icon-left p-ml-auto">
                 <i class="pi pi-search"></i>
                 <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
             </span>
+            <button pButton type="button" class="p-button-text p-button-secondary" (click)="onAddPet()">Add Pet</button>
         </div>
     </ng-template>
     <ng-template pTemplate="header">
@@ -14,8 +17,13 @@
             <th pSortableColumn="name" >Name<p-sortIcon field="name" ></p-sortIcon></th>
             <th >Sex</th>
             <th >Year</th>
-            <th >Animal</th>
-            <th>Race</th>
+            <th>Animal</th>
+            <th>
+                <div clas="p-d-flex p-jc-between p-ai-center">
+                    Race
+                    <p-columnFilter type="text" field="race.name" display="menu"></p-columnFilter>
+                </div>
+            </th>
             <th>Owner</th>
         </tr>
     </ng-template>
@@ -24,15 +32,19 @@
             <!-- <td>
                 <button type="button" pButton pRipple [pRowToggler]="pet" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
             </td> -->
-            <td>{{pet.name}}</td>
+            <td>
+                <a [routerLink] = "['/pets', pet.id]">
+                    {{pet.name}}
+                </a>
+            </td>
             <td>{{pet.sex}}</td>
-            <td>{{pet.year}}</td>
-            <td>{{pet.animal.name}}</td>
+            <td>{{pet.year | date:'MM/y'}}</td>
+            <td>{{pet.race.animal.name}}</td>
             <td>{{pet.race.name}}</td>
             <td>{{pet.owner.fullName}}</td>
         </tr>
     </ng-template>
-    <!-- <ng-template pTemplate="rowexpansion" let-user>
-       <tr><td colspan="6"><app-edit-user [user]="user" (editedUser)="onEditedUser($event)" (deletedUser)="onDeletedUser($event)"></app-edit-user></td></tr>
+    <!-- <ng-template pTemplate="rowexpansion" let-pet> 
+       <tr><td colspan="6"><app-edit-pet ></app-edit-pet></td></tr>
     </ng-template> -->
 </p-table>

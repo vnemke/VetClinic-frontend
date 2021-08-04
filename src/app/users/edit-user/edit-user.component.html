@@ -2,49 +2,55 @@
 
     <div class="row justify-content-center">
         <div class="col-auto">
-            <mat-form-field appearance="fill">
-                <mat-label>Username</mat-label>
-                <input matInput formControlName="username">
-            </mat-form-field>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText formControlName="username">
+                <label for="float-input">Username</label>
+            </span>
         </div>
+    </div>
+
+    <div class="row justify-content-center"> 
         <div class="col-auto">
-            <mat-form-field appearance="fill">
-                <mat-label>Email</mat-label>
-                <input matInput formControlName="email">
-            </mat-form-field>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText formControlName="email">
+                <label for="float-input">Email</label>
+            </span>
         </div>
     </div>
     
     <div class="row justify-content-center">
         <div class="col-auto">
-            <mat-form-field appearance="fill">
-                <mat-label>First Name</mat-label>
-                <input matInput formControlName="firstName" >
-            </mat-form-field>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText formControlName="firstName">
+                <label for="float-input">First Name</label>
+            </span>
         </div>
+    </div>
+    <div class="row justify-content-center">   
         <div class="col-auto">
-            <mat-form-field appearance="fill">
-                <mat-label>Last Name</mat-label>
-                <input matInput formControlName="lastName">
-            </mat-form-field>
+            <span class="p-float-label">
+                <input id="float-input" type="text" pInputText formControlName="lastName">
+                <label for="float-input">Last Name</label>
+            </span>
         </div>
     </div>
     
     <div class="row justify-content-center">
         <div class="col-auto">
-            <mat-form-field class="option">
-                <mat-label>Role</mat-label>
-                <mat-select formControlName="roleId">
-                    <mat-option *ngFor="let role of roles" [(value)]="role.id">{{role.name}}</mat-option>
-                </mat-select>
-            </mat-form-field>
+            <p-dropdown [options]="roles" optionValue="id" formControlName="roleId" placeholder="Role" optionLabel="name">
+                <ng-template let-role>
+                    <div class="p-d-flex p-ai-center">
+                        <div>{{role.name}}</div>
+                    </div>
+                </ng-template>
+            </p-dropdown>
         </div>
     </div>    
     <br>
     <div class="row justify-content-center">    
         <div class="col-auto">
-            <button mat-button (click)="onEditUser()">Edit</button>
-            <button mat-button color="warn" (click)="deleteUserModal(user)">Delete</button>
+            <button pButton type="button" class="p-button-sm" (click)="onEditUser()">Edit</button>&nbsp;
+            <button pButton type="button" class="p-button-sm p-button-secondary" (click)="deleteUserModal(user)">Delete</button>
         </div>
     </div>    
 </form>

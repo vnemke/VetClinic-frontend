@@ -4,9 +4,9 @@ import { ActivatedRoute } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
 import { Role } from '../Role';
 import { User } from '../User';
-import {MatDialog, MatDialogConfig, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ModalComponent } from '../../modal/modal.component';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-edit-user',
@@ -20,15 +20,16 @@ export class EditUserComponent implements OnInit {
   @Output() deletedUser: EventEmitter<User> = new EventEmitter();
   roles: Role[] = [];
   myForm: FormGroup;
+  ref: DynamicDialogRef;
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   constructor(private fb: FormBuilder, private api: ApiService, public route: ActivatedRoute,
-    private matDialog: MatDialog, private _snackBar: MatSnackBar) { }
+    public dialogService: DialogService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.roles = this.route.snapshot.data.roles;
-    this.users = this.route.snapshot.data.users;       
-    
+    this.users = this.route.snapshot.data.users;
+
     this.myForm = this.fb.group({
       username: {value: this.user.username, disabled: true},
       email: {value: this.user.email, disabled: true },
@@ -36,42 +37,53 @@ export class EditUserComponent implements OnInit {
       lastName: this.user.lastName,
       roleId: this.user.roleId
     });
+    // console.log('form', this.myForm.value);
+    // console.log('formint', this.myForm.value.roleId);
+    // console.log('roles', this.roles);
   }
 
   onEditUser() {
-    var roleVelue = this.myForm.value.roleId;
-    var index = this.roles.findIndex(r => r.id == roleVelue);
+    var roleValue = this.myForm.value.roleId;
+    console.log('int', roleValue);
+    var index = this.roles.findIndex(r => r.id == roleValue);    
     var role = this.roles[index];
-    // declaring user role
+    console.log('role?',role);
+    
+    this.user.roleId = role.id;
     this.user.role = role;
-   
-    var formValue = {...this.myForm.value, id: this.user.id, username: this.user.username, email: this.user.email}
-    var editUser = {...this.user,...formValue}
-    console.log('form', formValue);
-    // user values from form
 
+    console.log('assg', this.user);
+    
+   
+    var formValue = {...this.myForm.value, id: this.user.id, username: this.user.username, email: this.user.email, roleId: this.user.roleId}
+    var editUser = {...this.user, ...formValue}
+    // console.log('euser', editUser);
+    
+    
+    // user values from form
     this.api.update("/api/users/" + this.user.id, formValue)
-    .subscribe(
-      () => {
-        this.editedUser.emit(editUser); 
-        console.log(editUser);
-        this._snackBar.open(this.user.username + ' is edited', 'End now', {
-					duration: 5000,
-					verticalPosition: this.verticalPosition
-				});
-      }   
-    )
+      .subscribe(
+        () => {
+          this.editedUser.emit(editUser);
+          console.log('edit',editUser);
+          this._snackBar.open(this.user.username + ' is edited', 'End now', {
+            duration: 5000,
+            verticalPosition: this.verticalPosition
+          });
+        }
+      )
+      // console.log('req', formValue);
   }
 
   deleteUserModal(modalUser: User) {
-    const dailogDeleteUser = this.matDialog.open(ModalComponent, {
-      data: { user: modalUser, message: 'Do you want to delete ' + modalUser.username }  
+    const dailogDeleteUser = this.dialogService.open(ModalComponent, {
+      data: { user: modalUser }, header: 'Do you want to delete ' + modalUser.username, width: '37%'
     });
-    dailogDeleteUser.afterClosed().subscribe(res => {
+    dailogDeleteUser.onClose.subscribe(res => {
       console.log(res);
-      if(res) {
+      if (res) {
         this.api.delete("/api/users/" + this.user.id)
-        .subscribe(()=> {
+        .subscribe(() => {
           this.deletedUser.emit(this.user);
           this._snackBar.open(modalUser.username + ' is deleted', 'End now', {
             duration: 5000,

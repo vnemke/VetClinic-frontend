@@ -4,9 +4,9 @@ export interface Pet {
     sex: string;
     year: Date;
     animalId: number;
-    animal: object;
+    animal: any;
     raceId: number;
-    race: object;
+    race: any;
     ownerId: number;
-    owner: object
+    owner: any;
 }

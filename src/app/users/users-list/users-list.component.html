@@ -1,4 +1,6 @@
 <p-table #dt1 [value]="users" dataKey="username"
+    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"  styleClass="p-datatable-customers"
+    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
     [globalFilterFields]="['username','email','firstName','lastName']" >
     <ng-template pTemplate="caption">
         <div class="p-d-flex">
