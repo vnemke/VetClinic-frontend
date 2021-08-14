@@ -1,50 +1,48 @@
-<p-table #dt1 [value]="pets" dataKey="name"
-    [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"  styleClass="p-datatable-customers "
-    [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-    [globalFilterFields]="['name','sex','year', 'race.name']">
-    <ng-template pTemplate="caption">
-        <div class="p-d-flex">
-            <span class="p-input-icon-left p-ml-auto">
-                <i class="pi pi-search"></i>
-                <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
-            </span>
-            <button pButton type="button" class="p-button-text p-button-secondary" (click)="onAddPet()">Add Pet</button>
-        </div>
-    </ng-template>
-    <ng-template pTemplate="header">
-        <tr>
-            <!-- <th style="width: 3rem"></th> -->
-            <th pSortableColumn="name" >Name<p-sortIcon field="name" ></p-sortIcon></th>
-            <th >Sex</th>
-            <th >Year</th>
-            <th>Animal</th>
-            <th>
-                <div clas="p-d-flex p-jc-between p-ai-center">
-                    Race
-                    <p-columnFilter type="text" field="race.name" display="menu"></p-columnFilter>
+<div class="container-fluid">
+    <p-table #dt1 [value]="pets" dataKey="name" 
+        [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"  styleClass="p-datatable-customers "
+        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['name','sex','year', 'race.name']">
+        <ng-template pTemplate="caption">
+            <div class="header-field">
+                <div class="p-d-flex">
+                    <span class="p-input-icon-left p-ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
+                    </span>
                 </div>
-            </th>
-            <th>Owner</th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-pet let-expanded="expanded">
-        <tr>
-            <!-- <td>
-                <button type="button" pButton pRipple [pRowToggler]="pet" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
-            </td> -->
-            <td>
-                <a [routerLink] = "['/pets', pet.id]">
-                    {{pet.name}}
-                </a>
-            </td>
-            <td>{{pet.sex}}</td>
-            <td>{{pet.year | date:'MM/y'}}</td>
-            <td>{{pet.race.animal.name}}</td>
-            <td>{{pet.race.name}}</td>
-            <td>{{pet.owner.fullName}}</td>
-        </tr>
-    </ng-template>
-    <!-- <ng-template pTemplate="rowexpansion" let-pet> 
-       <tr><td colspan="6"><app-edit-pet ></app-edit-pet></td></tr>
-    </ng-template> -->
-</p-table>
+                <div class="button-field">
+                    <button pButton type="button" class="p-button-text p-button-secondary" id="add-pet-btn" (click)="onAddPet()">Add Pet</button>
+                    <div class="show-btn">
+                        <div class="switch">Show all</div>
+                        <p-inputSwitch class="switch" (click)="onShowAll()"></p-inputSwitch>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="header">
+            <tr>
+                <th pSortableColumn="name" class="shown-columns">Name<p-sortIcon field="name" ></p-sortIcon></th>
+                <th class="shown-columns">Animal</th>
+                <th class="shown-columns-race"> Race</th>
+                <th class="hide-columns" [class.show]="showAll">Year</th>
+                <th class="hide-columns" [class.show]="showAll">Sex</th>
+                <th class="hide-columns" [class.show]="showAll">Owner</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pet let-expanded="expanded">
+            <tr>
+                <td class="shown-columns">
+                    <a [routerLink] = "['/pets', pet.id]">
+                        {{pet.name}}
+                    </a>
+                </td>
+                <td class="shown-columns">{{pet.race.animal.name}}</td>
+                <td class="shown-columns-race">{{pet.race.name}}</td>
+                <td class="hide-columns" [class.show]="showAll">{{pet.year | date:'MM/y'}}</td>
+                <td class="hide-columns" [class.show]="showAll">{{pet.sex}}</td>
+                <td class="hide-columns" [class.show]="showAll">{{pet.owner.fullName}}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

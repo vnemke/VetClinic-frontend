@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
@@ -9,6 +9,7 @@ import { Animal } from '../animal';
 import { Owner } from '../owner';
 import { Pet } from '../pet';
 import { Race } from '../race';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-edit-pet',
@@ -38,14 +39,13 @@ export class EditPetComponent implements OnInit {
     console.log(this.pet);
 
     this.petForm = this.fb.group({
-      name: this.pet.name,
-      sex: this.pet.sex,
-      year: [new Date()],
-      animalId: this.pet.race.animalId,
-      raceId: this.pet.raceId,
-      ownerId: this.pet.ownerId
+      name: [this.pet.name,  Validators.required],
+      sex: [this.pet.sex,  Validators.required],
+      year: [formatDate(this.pet.year,'MM/yyyy','en'), Validators.required],
+      animalId: [this.pet.race.animalId, Validators.required],
+      raceId: [this.pet.raceId, Validators.required],
+      ownerId: [this.pet.ownerId, Validators.required]
     })
-
 
     this.filteredRaces = this.races.filter(r => r.animalId == this.pet.race.animalId);
     console.log(this.filteredRaces);
@@ -73,20 +73,18 @@ export class EditPetComponent implements OnInit {
       .subscribe(
         () => {
         this.router.navigate(['pets']) 
-          this._snackBar.open(this.pet.name + ' is edited', 'End now', {
+          this._snackBar.open(this.pet.name + ' is edited', 'OK', {
             duration: 5000,
             verticalPosition: this.verticalPosition
           });
         }
       )
-
-      console.log('req',body); 
   }
 
   onDeletePetModal(modalPet: Pet) {
     const dailogDeletePet = this.dialogService.open(ModalComponent, {
-      data: { user: modalPet }, header: 'Do you want to delete ' + modalPet.name, width: '37%'
-    });
+      data: { user: modalPet }, header: 'Do you want to delete ' + modalPet.name }
+    );
     dailogDeletePet.onClose.subscribe(res => {
       console.log(res);
       if (res) {

@@ -17,8 +17,9 @@ export class UsersListComponent implements OnInit {
   users: User[] = [];
   roles: Role[] = [];
   url: string = "/api/users"
-  @ViewChild('dt1') dt: Table;
+  showAll: boolean;
 
+  @ViewChild('dt1') dt: Table;
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -34,6 +35,7 @@ export class UsersListComponent implements OnInit {
    console.log(this.route.snapshot);
    console.log(this.users);
    
+   this.showAll = false;
   }
 
   onEditedUser(user: User): void {
@@ -49,4 +51,12 @@ export class UsersListComponent implements OnInit {
     this.users.splice(res, 1);
   }  
   // deleting user and make new array
+
+  onShowAll() {
+    if (!this.showAll) {
+      this.showAll = true;
+    } else {
+      this.showAll = false;
+    }
+  }
 }

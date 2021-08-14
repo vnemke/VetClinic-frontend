@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
-
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,6 +21,9 @@ import { MatRadioModule } from '@angular/material/radio';
 import { CalendarModule } from 'primeng/calendar';
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
+import { InputSwitchModule } from 'primeng/inputswitch';
+import { MessageModule } from 'primeng/message';
+import { MessageService } from 'primeng/api';
 
 @NgModule({
 	declarations: [ModalComponent],
@@ -46,6 +48,8 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 		CalendarModule,
 		DropdownModule,
 		DynamicDialogModule,
+		InputSwitchModule, 
+		MessageModule,
 	],
 	exports: [
 		CommonModule, 
@@ -68,11 +72,14 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 		CalendarModule,
 		DropdownModule,
 		DynamicDialogModule,
+		InputSwitchModule,
+		MessageModule	
 	],
 	providers: [
 		{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }},
 		{provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true }},
 		[DialogService],
+		MessageService
 	],
 	entryComponents: [ModalComponent]
 })

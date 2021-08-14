@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/api.service';
@@ -20,11 +20,9 @@ export class NewPetComponent implements OnInit {
   owners: Owner[] = [];
   races: Race[] = [];
   filteredRaces: Race[] = [];
-  selectedAnimal: boolean = false;
-  newOwner: boolean = false;
-  // animalValue: any;
-  // gender: string;
-
+  selectedAnimal: boolean;
+  newOwner: boolean;
+  selectedValue: string='female';
 
   petForm: FormGroup;
   ownerForm: FormGroup;
@@ -42,27 +40,27 @@ export class NewPetComponent implements OnInit {
     console.log(this.route.snapshot);    
 
     this.petForm = this.fb.group({
-      name: [''],
-      sex: [''],
-      year: [new Date()],
-      animal: [null],
-      race: [''],
-      owner: [null]
+      name: ['', Validators.required],
+      sex: ['',  Validators.required],
+      year: ['',  Validators.required],
+      animalId: [null, Validators.required],
+      raceId: [null,  Validators.required],
+      ownerId: [null, Validators.required]
     });
-    
-    this.petForm.get('animal')?.valueChanges
-    .subscribe(animal => {
-      console.log(animal);
-      if(animal == null) {
-        console.log('nula vrednost', animal);
+
+    this.petForm.get('animalId')?.valueChanges
+    .subscribe(animalId => {
+      if (animalId == null) {
+        console.log('nula vrednost', animalId);
+        this.filteredRaces = [];
         this.selectedAnimal = false;
       } else {
-        var result = this.races.filter(r => r.animalId == animal.id);
+        var result = this.races.filter(r => r.animalId == animalId);
         console.log(result);
         this.filteredRaces = result;
-        this.selectedAnimal = true;  
-      }    
-    })
+        this.selectedAnimal = true;
+      }
+    })      
 
     this.ownerForm = this.fb.group({
       firstName: [''],
@@ -76,14 +74,17 @@ export class NewPetComponent implements OnInit {
 
   onNewOwner() {
     this.newOwner = true;
-  }
+    this.petForm.controls['ownerId'].disable();
+  }  
 
   onCancelNewOwner() {
     this.newOwner = false;
+    this.petForm.controls['ownerId'].enable();
   }
 
   onAddPet() {
-    var body = { owner: this.ownerForm.value, pet: this.petForm.value }
+    var body = { pet: this.petForm.value, owner: this.ownerForm.value }
+    console.log('forma',body);
 
     if(this.newOwner) {
       this.api.post("/api/pets/petWithOwner", body)
@@ -97,7 +98,7 @@ export class NewPetComponent implements OnInit {
         }
       )
     } else {
-      this.api.post("/api/pets/", this.petForm.value)
+      this.api.post("/api/pets", this.petForm.value)
       .subscribe(
         () => {
           this.router.navigate(['pets'])

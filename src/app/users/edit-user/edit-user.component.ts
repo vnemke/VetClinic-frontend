@@ -19,7 +19,7 @@ export class EditUserComponent implements OnInit {
   @Output() editedUser: EventEmitter<User> = new EventEmitter();
   @Output() deletedUser: EventEmitter<User> = new EventEmitter();
   roles: Role[] = [];
-  myForm: FormGroup;
+  userForm: FormGroup;
   ref: DynamicDialogRef;
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
@@ -30,20 +30,17 @@ export class EditUserComponent implements OnInit {
     this.roles = this.route.snapshot.data.roles;
     this.users = this.route.snapshot.data.users;
 
-    this.myForm = this.fb.group({
+    this.userForm = this.fb.group({
       username: {value: this.user.username, disabled: true},
       email: {value: this.user.email, disabled: true },
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       roleId: this.user.roleId
     });
-    // console.log('form', this.myForm.value);
-    // console.log('formint', this.myForm.value.roleId);
-    // console.log('roles', this.roles);
   }
 
   onEditUser() {
-    var roleValue = this.myForm.value.roleId;
+    var roleValue = this.userForm.value.roleId;
     console.log('int', roleValue);
     var index = this.roles.findIndex(r => r.id == roleValue);    
     var role = this.roles[index];
@@ -51,14 +48,9 @@ export class EditUserComponent implements OnInit {
     
     this.user.roleId = role.id;
     this.user.role = role;
-
-    console.log('assg', this.user);
     
-   
-    var formValue = {...this.myForm.value, id: this.user.id, username: this.user.username, email: this.user.email, roleId: this.user.roleId}
+    var formValue = {...this.userForm.value, id: this.user.id, username: this.user.username, email: this.user.email, roleId: this.user.roleId}
     var editUser = {...this.user, ...formValue}
-    // console.log('euser', editUser);
-    
     
     // user values from form
     this.api.update("/api/users/" + this.user.id, formValue)
@@ -66,26 +58,25 @@ export class EditUserComponent implements OnInit {
         () => {
           this.editedUser.emit(editUser);
           console.log('edit',editUser);
-          this._snackBar.open(this.user.username + ' is edited', 'End now', {
+          this._snackBar.open(this.user.username + ' is edited', 'OK', {
             duration: 5000,
             verticalPosition: this.verticalPosition
           });
         }
       )
-      // console.log('req', formValue);
   }
 
   deleteUserModal(modalUser: User) {
     const dailogDeleteUser = this.dialogService.open(ModalComponent, {
-      data: { user: modalUser }, header: 'Do you want to delete ' + modalUser.username, width: '37%'
-    });
+      data: { user: modalUser }, header: 'Do you want to delete ' + modalUser.username }
+    );
     dailogDeleteUser.onClose.subscribe(res => {
       console.log(res);
       if (res) {
         this.api.delete("/api/users/" + this.user.id)
         .subscribe(() => {
           this.deletedUser.emit(this.user);
-          this._snackBar.open(modalUser.username + ' is deleted', 'End now', {
+          this._snackBar.open(modalUser.username + ' is deleted', 'OK', {
             duration: 5000,
             verticalPosition: this.verticalPosition
           });

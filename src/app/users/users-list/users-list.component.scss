@@ -1,0 +1,36 @@
+.show-btn {
+    display: none;
+}
+
+@media only screen and (max-width: 670px) {
+    .show-btn {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0.5rem;
+    }
+
+    .p-d-flex {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .show-columns {
+        min-width: 120px;
+    }
+
+    .hide-columns {
+        display: none;
+        min-width: 100px;
+    }
+
+    .show {
+        display: table-cell;
+    }
+
+    .switch {
+        padding-top: 0.5rem;
+    }
+
+}

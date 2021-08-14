@@ -1,56 +1,40 @@
-<form [formGroup]="myForm" class="myForm">
+<form [formGroup]="userForm" class="userForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <input class="input" type="text" pInputText placeholder="Username" formControlName="username" [style]="{'width':'250px'}">
+            </div>
 
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText formControlName="username">
-                <label for="float-input">Username</label>
-            </span>
-        </div>
-    </div>
+            <div class="col-12">
+                <input class="input" type="text" pInputText placeholder="Email" formControlName="email" [style]="{'width':'250px'}">
+            </div>
 
-    <div class="row justify-content-center"> 
-        <div class="col-auto">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText formControlName="email">
-                <label for="float-input">Email</label>
-            </span>
+            <div class="col-12">
+                <p-dropdown [options]="roles" optionValue="id" formControlName="roleId" placeholder="Role" optionLabel="name" [style]="{'width':'250px'}" [showClear]="true" >
+                    <ng-template let-role>
+                        <div class="p-d-flex p-ai-center">
+                            <div>{{role.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+            </div>
+
+            <div class="col-12">
+                <input class="input" type="text" pInputText placeholder="First Name" formControlName="firstName" [style]="{'width':'250px'}">
+            </div>
+
+            <div class="col-12">
+                <input class="input" type="text" pInputText placeholder="Last Name" formControlName="lastName" [style]="{'width':'250px'}">
+            </div>
+
+            <div class="col-12">
+                <button pButton type="button" class="p-button-sm" (click)="onEditUser()">Edit</button>&nbsp;
+                <button pButton type="button" class="p-button-sm p-button-secondary" (click)="deleteUserModal(user)">Delete</button>
+            </div>
         </div>
     </div>
-    
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText formControlName="firstName">
-                <label for="float-input">First Name</label>
-            </span>
-        </div>
-    </div>
-    <div class="row justify-content-center">   
-        <div class="col-auto">
-            <span class="p-float-label">
-                <input id="float-input" type="text" pInputText formControlName="lastName">
-                <label for="float-input">Last Name</label>
-            </span>
-        </div>
-    </div>
-    
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <p-dropdown [options]="roles" optionValue="id" formControlName="roleId" placeholder="Role" optionLabel="name">
-                <ng-template let-role>
-                    <div class="p-d-flex p-ai-center">
-                        <div>{{role.name}}</div>
-                    </div>
-                </ng-template>
-            </p-dropdown>
-        </div>
-    </div>    
-    <br>
-    <div class="row justify-content-center">    
-        <div class="col-auto">
-            <button pButton type="button" class="p-button-sm" (click)="onEditUser()">Edit</button>&nbsp;
-            <button pButton type="button" class="p-button-sm p-button-secondary" (click)="deleteUserModal(user)">Delete</button>
-        </div>
-    </div>    
 </form>
+
+
+    
+   

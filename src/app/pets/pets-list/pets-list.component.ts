@@ -18,8 +18,9 @@ export class PetsListComponent implements OnInit {
   animals: Animal[] = [];
   owners: Owner[] = [];
   races: Race[] = [];
-  @ViewChild('dt1') dt: Table;
+  showAll: boolean;
 
+  @ViewChild('dt1') dt: Table;
 
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
@@ -35,10 +36,20 @@ export class PetsListComponent implements OnInit {
     this.races = this.route.snapshot.data.races;
     
     console.log(this.pets);
+
+    this.showAll = false;
   }
 
   onAddPet() {
     this.router.navigate(['pets/add'])
+  }
+
+  onShowAll() {
+    if (!this.showAll) {
+      this.showAll = true;
+    } else {
+      this.showAll = false;
+    }
   }
 
 }
