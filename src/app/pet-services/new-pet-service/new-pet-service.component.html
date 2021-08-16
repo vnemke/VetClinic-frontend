@@ -1,0 +1,35 @@
+
+<form [formGroup]="petServiceForm" class="petServiceForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="field">
+                    <input class="p-invalid" type="text" pInputText placeholder="Name" formControlName="name" [style]="{'width':'250px'}">           
+                    <div *ngIf="petServiceForm.controls['name'].invalid && petServiceForm.controls['name'].dirty">
+                        <small *ngIf="petServiceForm.controls['name'].errors?.required" class="p-error">Name is required</small>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="field">
+                    <input class="p-invalid" type="text" pInputText placeholder="Price" formControlName="price" [style]="{'width':'250px'}">           
+                    <div *ngIf="petServiceForm.controls['price'].invalid && petServiceForm.controls['price'].dirty">
+                        <small *ngIf="petServiceForm.controls['price'].errors?.required" class="p-error">Price is required</small>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="field">
+                    <input class="p-invalid" type="text" pInputText placeholder="Description" formControlName="description" [style]="{'width':'250px'}">           
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button pButton type="button" class="p-button-sm" (click)="onAddService()" [disabled]="!petServiceForm.valid">Add Pet</button>
+                <button pButton type="button" class="p-button-sm p-button-secondary" (click)="onCancel()">Cancel</button>
+            </div>
+        </div>
+    </div>    
+</form>    

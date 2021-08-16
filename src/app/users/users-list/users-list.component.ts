@@ -40,9 +40,7 @@ export class UsersListComponent implements OnInit {
 
   onEditedUser(user: User): void {
     var res = this.users.findIndex(u => u.id == user.id);
-    this.users[res] = user
-    // console.log('list',user);
-    
+    this.users[res] = user;    
   }
   // replacing old user with new edited user 
 
@@ -53,6 +51,7 @@ export class UsersListComponent implements OnInit {
   // deleting user and make new array
 
   onShowAll() {
+   
     if (!this.showAll) {
       this.showAll = true;
     } else {

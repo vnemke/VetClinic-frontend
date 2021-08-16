@@ -6,15 +6,14 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { ApiService } from '../api.service';
-import { Pet } from '././pet'
+import { PetService } from './pet-service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class PetsResolver implements Resolve<Pet[]> {
-
+export class PetServicesResolver implements Resolve<PetService[]> {
   constructor(private api: ApiService) {}
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Pet[]> {
-    return this.api.get('/api/pets');
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<PetService[]> {
+    return this.api.get('/api/petservices');
   }
 }

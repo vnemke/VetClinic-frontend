@@ -39,7 +39,7 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="rowexpansion" let-user>
-        <tr><td colspan="6"><app-edit-user [user]="user" (editedUser)="onEditedUser($event)" (deletedUser)="onDeletedUser($event)"></app-edit-user></td></tr>
+        <tr><td colspan="6" *ngIf="!showAll"><app-edit-user [user]="user" (editedUser)="onEditedUser($event)" (deletedUser)="onDeletedUser($event)"></app-edit-user></td></tr>
         </ng-template>
     </p-table>
 </div>
