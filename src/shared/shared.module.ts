@@ -24,6 +24,8 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
+import { MultiSelectModule } from 'primeng/multiselect';
+
 
 @NgModule({
 	declarations: [ModalComponent],
@@ -50,6 +52,7 @@ import { MessageService } from 'primeng/api';
 		DynamicDialogModule,
 		InputSwitchModule, 
 		MessageModule,
+		MultiSelectModule
 	],
 	exports: [
 		CommonModule, 
@@ -73,7 +76,8 @@ import { MessageService } from 'primeng/api';
 		DropdownModule,
 		DynamicDialogModule,
 		InputSwitchModule,
-		MessageModule	
+		MessageModule,
+		MultiSelectModule	
 	],
 	providers: [
 		{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }},

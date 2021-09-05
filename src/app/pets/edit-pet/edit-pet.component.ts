@@ -50,6 +50,8 @@ export class EditPetComponent implements OnInit {
     this.filteredRaces = this.races.filter(r => r.animalId == this.pet.race.animalId);
     console.log(this.filteredRaces);
   
+    console.log('forma', this.petForm.value);
+    
 
     this.petForm.get('animalId')?.valueChanges
     .subscribe(animalId => {
