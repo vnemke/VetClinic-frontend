@@ -25,6 +25,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { MessageModule } from 'primeng/message';
 import { MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { ProgressBarModule } from 'primeng/progressbar';
+import { CardModule } from 'primeng/card';
 
 
 @NgModule({
@@ -52,7 +54,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 		DynamicDialogModule,
 		InputSwitchModule, 
 		MessageModule,
-		MultiSelectModule
+		MultiSelectModule,
+		ProgressBarModule,
+		CardModule
 	],
 	exports: [
 		CommonModule, 
@@ -77,7 +81,9 @@ import { MultiSelectModule } from 'primeng/multiselect';
 		DynamicDialogModule,
 		InputSwitchModule,
 		MessageModule,
-		MultiSelectModule	
+		MultiSelectModule,
+		ProgressBarModule,
+		CardModule
 	],
 	providers: [
 		{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }},

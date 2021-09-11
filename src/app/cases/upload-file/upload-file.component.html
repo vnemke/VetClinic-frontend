@@ -1,0 +1,13 @@
+<div class="info">
+    <h4 class="name">
+        {{ droppedFile.name }}
+    </h4>
+    <p class="size">
+        size: {{ droppedFile.size | filesize }}
+    </p>
+    <p-progressBar [value]="value" [style]="{'min-width':'300px'}"></p-progressBar>
+</div>
+
+<i class="pi pi-trash" (click)="onDeleteFile()"></i>
+
+

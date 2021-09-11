@@ -13,6 +13,11 @@ import { XraysResolver } from './xrays.resolver';
 import { VetsResolver } from './vets.resolver';
 import { PetServicesResolver } from './pet-services.resolver';
 import { PetsResolver } from '../pets/pets.resolver';
+import { UploaderComponent } from './uploader/uploader.component';
+import { UploadFileComponent } from './upload-file/upload-file.component';
+
+import { DndDirective } from './uploader/dnd.directive';
+import { FileSizePipe } from './upload-file/filesize.pipe';
 
 const routes: Routes = [
   {
@@ -68,20 +73,25 @@ const routes: Routes = [
   }
 ];
 
-
 @NgModule({
   declarations: [
     CasesListComponent,
     NewCaseComponent,
     CaseDetailsComponent,
     EditCaseComponent,
-    CaseDetailsComponent
-
+    CaseDetailsComponent,
+    UploaderComponent,
+    UploadFileComponent,
+    DndDirective,
+    FileSizePipe
   ],
   imports: [
     RouterModule.forChild(routes),
     SharedModule
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [
+    FileSizePipe
+  ]
 })
 export class CasesModule { }

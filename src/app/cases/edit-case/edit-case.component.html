@@ -123,12 +123,24 @@
                         </div>      
                     </div>
                     <!-- <button pButton type="button" class="p-button-sm p-button-text p-button-secondary" (click)="deleteControl(i)">Remove</button> -->
-                    <i class="pi pi-trash" style="font-size: 1.1rem; color: red;" (click)="deleteTherapy(i)"></i>
+                    <i class="pi pi-trash" style="font-size: 1.1rem; color: red;" (click)="deleteControl(i)"></i> 
                 </div>
                 <div class="icon-field">
                     <button pButton type="button" class="p-button-sm p-button-text p-button-primary" (click)="addConstrolsForm()">Add Control</button>
-                </div> 
+                </div>
             </div>
+
+
+            <!-- uploader -->
+            <!-- <div class="col-12">
+                <h1>File upload</h1>
+                <input type="file" (change)="onFileSelected($event)">
+                <button type="button" (click)="onUpload()">Upload</button>
+            </div> -->
+
+            <!-- drag & drop upload -->
+            <app-uploader ></app-uploader>
+
             <div class="col-12">
                 <div class="buttons-field">
                     <button pButton type="button" class="p-button-sm" (click)="onEditCase()" [disabled]="!caseForm.valid">Edit</button>
