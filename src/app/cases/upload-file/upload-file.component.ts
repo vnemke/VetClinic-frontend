@@ -1,7 +1,6 @@
 import {  HttpEventType } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UploaderService } from '../uploader/uploader.service';
-import { FileSizePipe } from './filesize.pipe';
 
 @Component({
   selector: 'app-upload-file',
@@ -27,9 +26,17 @@ export class UploadFileComponent implements OnInit {
       } else if(event.type === HttpEventType.Response) {
         console.log(event);
       }
-      console.log(event);      
+      // console.log('upFile',event);
+      console.log('drop',this.droppedFile);
+            
     })
   }
+
+  extensionClass(droppedFile: any) {
+    return droppedFile.name.split('.').pop().toLowerCase();
+    
+  }
+  
   onDeleteFile() {
     this.deleteFile.emit(this.droppedFile);    
   }

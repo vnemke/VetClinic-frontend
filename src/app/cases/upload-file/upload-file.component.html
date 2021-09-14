@@ -1,10 +1,8 @@
 <div class="info">
-    <h4 class="name">
+    <div class="name" [ngClass]="extensionClass(droppedFile)">
+        <!-- <div class="icon" ></div> -->
         {{ droppedFile.name }}
-    </h4>
-    <p class="size">
-        size: {{ droppedFile.size | filesize }}
-    </p>
+    </div>
     <p-progressBar [value]="value" [style]="{'min-width':'300px'}"></p-progressBar>
 </div>
 

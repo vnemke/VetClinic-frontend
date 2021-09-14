@@ -17,7 +17,7 @@ export class UploaderComponent implements OnInit {
   onFileSelected(event: any) {
     var selectedFiles = event.target.files;
     for (let file of selectedFiles ) {
-      this.files.push(file);
+      this.files.push(file);      
     }
   }
 

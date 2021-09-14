@@ -2,6 +2,40 @@
     min-width: 80%;
 }
 
+.name {
+    position: relative;
+    padding: 30px;
+    padding-left: 40px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-image: url("/assets/svg/file.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 30px;
+        height: 40px;
+    }
+}
+
+.doc:before, .docx:before {
+    background-image: url("/assets/svg/doc.svg")
+}
+
+.pdf:before {
+    background-image: url("/assets/svg/pdf.svg");
+}
+
+.jpg:before, .png:before, .jpeg:before {
+    background-image: url("/assets/svg/jpg.svg");
+}
+
 .pi {
     cursor: pointer;
+    padding: 0.2rem
 }
