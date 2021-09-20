@@ -1,10 +1,8 @@
 import { formatDate } from '@angular/common';
-import { HttpClient, HttpEventType } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
 import { DialogService } from 'primeng/dynamicdialog';
 import { ApiService } from 'src/app/api.service';
 import { ModalComponent } from 'src/app/modal/modal.component';
@@ -36,11 +34,12 @@ export class EditCaseComponent implements OnInit {
   selectedTherapies: any[] = [];
   selectedControls: any[] = [];
 
+  @ViewChild('fileUploader') fileUploader: any;
+
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   
   constructor(private fb: FormBuilder, private api: ApiService, private route: ActivatedRoute, 
-    public router: Router, public dialogService: DialogService, private _snackBar: MatSnackBar,
-    private http: HttpClient) { }
+    public router: Router, public dialogService: DialogService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.case = this.route.snapshot.data.case;
@@ -67,7 +66,7 @@ export class EditCaseComponent implements OnInit {
       vetCases: [this.selectedVets, Validators.required],
       casePetServices: [this.seletedServices, Validators.required],
       therapies: this.fb.array([]),
-      controls: this.fb.array([])
+      controls: this.fb.array([]),
       // xrays: this.case.xrays
     }); 
 
@@ -129,53 +128,26 @@ export class EditCaseComponent implements OnInit {
   deleteControl(controlIndex: number) {
     this.controlsForm.removeAt(controlIndex);
   }
-
-  //uploder
-  // selectedFile: File;
-
-  // onFileSelected(event: any) {
-  //   this.selectedFile = <File>event.target.files[0];
-  // }
-
-  // onUpload() {
-  //   const fd = new FormData();
-  //   fd.append('files', this.selectedFile, this.selectedFile.name);
-
-  //   this.http.post("/api/xrays/upload", fd, {
-  //     reportProgress: true,
-  //     observe: 'events'
-  //   })
-  //   .subscribe(event => {
-  //     if (event.type === HttpEventType.UploadProgress) {
-  //       const total: any = event.total
-  //       console.log('Upload Prograss: '+ Math.round(event.loaded / total * 100) + '%');
-        
-  //     } else if(event.type === HttpEventType.Response) {
-  //       console.log(event);
-  //     }
-  //     console.log(event);
-  //   })
-  // }
  
   onEditCase() {
-    var body = { ...this.caseForm.value, id: this.case.id }
+    var body = { ...this.caseForm.value, id: this.case.id, xrays: this.fileUploader.getUploaded() }
     body.vetCases = body.vetCases.map((vetIdArg: any) => {
       return {vetId: vetIdArg}
     })
     body.casePetServices = body.casePetServices.map((ServiceIdArg: any) => {
       return {petServiceId: ServiceIdArg}
     })
-    console.log('editval',body);
     this.api.update("/api/cases/" + this.case.id, body)
-      .subscribe(
-        () => {
-          this.router.navigate(['cases']) 
-          this._snackBar.open(this.case.name + ' is edited', 'OK', {
-            duration: 5000,
-            verticalPosition: this.verticalPosition
-          });
-        }
-      )
+    .subscribe(
+      () => {
+        console.log('editbody',body);
+        this.router.navigate(['cases']) 
+        this._snackBar.open(this.case.name + ' is edited', 'OK', {
+          duration: 5000,
+          verticalPosition: this.verticalPosition
+        });
+      }
+    )
   }
 
   onDeleteCaseModal(modalCase: Case) {
@@ -195,6 +167,10 @@ export class EditCaseComponent implements OnInit {
       }
     })
   }
+
+  // onGetUrls() {
+  //   this.fileUploader.getUploaded();
+  // }
 
   onCancel() {
     this.router.navigate(['cases'])

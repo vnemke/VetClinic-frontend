@@ -1,1 +1,55 @@
-<p>case-details works!</p>
+<!-- <div ngFor="let case of cases">{{case.name}}</div>
+<div ngFor="let case of cases">{{case.diagnosis}}</div> -->
+
+
+<p-card>
+    <ng-template pTemplate="header">
+        {{case.name}}
+    </ng-template>
+    Body Content
+    <ng-template pTemplate="footer">
+        {{case.diagnosis}}
+    </ng-template>
+</p-card>
+
+<div class="details">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <label for="">Case</label>
+                {{case.name}}
+            </div>
+            <div class="col-12">
+                {{case.pet.name}}
+            </div>
+            <div class="col-12" *ngFor="let vc of case.vetCases">
+                {{vc.vet.fullName}}
+            </div>
+            <div class="col-12">
+                {{case.date}}
+            </div>
+            <div class="col-12">
+                {{case.diagnosis}}
+            </div>
+            <div class="col-12" *ngFor="let t of case.therapies">
+                {{t.date}}
+                {{t.description}}
+                {{t.drug}}
+            </div>
+            <div class="col-12" *ngFor="let c of case.controls">
+                {{c.name}}
+                {{c.date}}
+                {{c.description}}
+            </div>
+            <div class="col-12">
+                {{case.description}}
+            </div>
+            <div class="col-12" *ngFor="let cs of case.casePetServices">
+                {{cs.petService.name}}
+            </div>
+            <div class="col-12">
+                {{case.xrays}}
+            </div>
+        </div>
+    </div>
+</div>

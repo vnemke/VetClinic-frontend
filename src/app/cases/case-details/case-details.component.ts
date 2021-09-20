@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Case } from '../case';
 
 @Component({
   selector: 'app-case-details',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CaseDetailsComponent implements OnInit {
 
-  constructor() { }
+  case: Case;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    this.case = this.route.snapshot.data.case;
+    console.log(this.case);
   }
 
 }

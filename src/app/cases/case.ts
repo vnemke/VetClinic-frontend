@@ -4,6 +4,7 @@ export interface Case {
     petId: number;
     pet: any;
     diagnosis: string;
+    description: string;
     date: Date;
     therapyId: number;
     therapies: any;

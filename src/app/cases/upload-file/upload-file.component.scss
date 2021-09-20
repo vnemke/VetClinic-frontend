@@ -1,5 +1,9 @@
 .info {
     min-width: 80%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .name {
@@ -20,7 +24,12 @@
         background-size: contain;
         width: 30px;
         height: 40px;
+        filter: grayscale(75%);
     }
+}
+
+.completed .name:before {
+    filter: none;
 }
 
 .doc:before, .docx:before {

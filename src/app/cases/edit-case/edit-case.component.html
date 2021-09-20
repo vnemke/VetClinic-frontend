@@ -129,17 +129,9 @@
                     <button pButton type="button" class="p-button-sm p-button-text p-button-primary" (click)="addConstrolsForm()">Add Control</button>
                 </div>
             </div>
-
-
-            <!-- uploader -->
-            <!-- <div class="col-12">
-                <h1>File upload</h1>
-                <input type="file" (change)="onFileSelected($event)">
-                <button type="button" (click)="onUpload()">Upload</button>
-            </div> -->
-
             <!-- drag & drop upload -->
-            <app-uploader ></app-uploader>
+            <app-uploader #fileUploader [xrays]="case.xrays"></app-uploader>
+            <!-- <button pButton type="button" class="p-button-sm" (click)="onGetUrls()">Get Urls</button>  -->
 
             <div class="col-12">
                 <div class="buttons-field">

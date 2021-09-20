@@ -1,11 +1,9 @@
-<div class="info">
-    <div class="name" [ngClass]="extensionClass(droppedFile)">
-        <!-- <div class="icon" ></div> -->
-        {{ droppedFile.name }}
+<div class="container g-0">
+    <div class="info" [class.completed]="complete">
+        <div class="name" [ngClass]="extensionClass(droppedFile)">
+            {{ droppedFile.fileName }}
+        </div>
+        <i class="pi pi-trash" (click)="onDeleteFile()"></i>
     </div>
     <p-progressBar [value]="value" [style]="{'min-width':'300px'}"></p-progressBar>
 </div>
-
-<i class="pi pi-trash" (click)="onDeleteFile()"></i>
-
-
