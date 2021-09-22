@@ -22,6 +22,7 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
+                <th class="shown-columns">Id</th>
                 <th pSortableColumn="name" class="shown-columns">Name<p-sortIcon field="name" ></p-sortIcon></th>
                 <th class="shown-columns">Animal</th>
                 <th class="shown-columns-race"> Race</th>
@@ -32,6 +33,7 @@
         </ng-template>
         <ng-template pTemplate="body" let-pet let-expanded="expanded">
             <tr>
+                <td class="shown-columns">{{pet.id}}</td>
                 <td class="shown-columns">
                     <a [routerLink] = "['/pets', pet.id]">
                         {{pet.name}}

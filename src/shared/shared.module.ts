@@ -27,6 +27,8 @@ import { MessageService } from 'primeng/api';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { CardModule } from 'primeng/card';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 
 
 @NgModule({
@@ -56,7 +58,8 @@ import { CardModule } from 'primeng/card';
 		MessageModule,
 		MultiSelectModule,
 		ProgressBarModule,
-		CardModule
+		CardModule,
+		InputTextareaModule
 	],
 	exports: [
 		CommonModule, 
@@ -83,7 +86,8 @@ import { CardModule } from 'primeng/card';
 		MessageModule,
 		MultiSelectModule,
 		ProgressBarModule,
-		CardModule
+		CardModule,
+		InputTextareaModule
 	],
 	providers: [
 		{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }},

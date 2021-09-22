@@ -18,6 +18,8 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
 
 import { DndDirective } from './uploader/dnd.directive';
 import { FileSizePipe } from './upload-file/filesize.pipe';
+import { AnimalsResolver } from '../pets/animals.resolver';
+import { RacesResolver } from '../pets/races.resolver';
 
 const routes: Routes = [
   {
@@ -37,6 +39,8 @@ const routes: Routes = [
     component: NewCaseComponent,
     resolve: {
       cases: CasesResolver,
+      animals: AnimalsResolver,
+      races: RacesResolver,
       pets: PetsResolver,
       therapies: TherapiesResolver,
       controls: ControlsResolver,

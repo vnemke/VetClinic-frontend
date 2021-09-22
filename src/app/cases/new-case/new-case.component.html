@@ -1,1 +1,200 @@
-<p>new-case works!</p>
+<div class="container">
+    <form [formGroup]="caseForm" class="caseForm">
+        <div class="row">
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <input class="p-invalid" type="text" pInputText placeholder="Name" formControlName="name" [style]="{'min-width':'300px'}"> 
+                        <div *ngIf="caseForm.controls['name'].invalid && caseForm.controls['name'].dirty">
+                            <small *ngIf="caseForm.controls['name'].errors?.required" class="p-error">Name is required</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <p-dropdown [options]="animals" formControlName="animalId" optionValue="id" placeholder="Animal" optionLabel="name" [style]="{'width':'300px'}" [showClear]="true" >
+                            <ng-template let-animal>
+                                <div class="p-d-flex p-ai-center">
+                                    <div>{{animal.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <div *ngIf="caseForm.controls['animalId'].invalid && caseForm.controls['animalId'].dirty">
+                            <small *ngIf="caseForm.controls['animalId'].errors?.required" class="p-error">Animal is required</small>
+                        </div> 
+                    </div>    
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <p-dropdown [options]="filteredRaces" formControlName="raceId" optionValue="id" placeholder="Race" optionLabel="name" [style]="{'width':'300px'}" [disabled]="!selectedAnimal" [showClear]="true">
+                            <ng-template let-race>
+                                <div class="p-d-flex p-ai-center">
+                                    <div>{{race.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <div *ngIf="caseForm.controls['raceId'].invalid && caseForm.controls['raceId'].dirty">
+                            <small *ngIf="caseForm.controls['raceId'].errors?.required" class="p-error">Race is required</small>
+                        </div>
+                    </div>     
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <p-dropdown [options]="filteredPets" formControlName="petId" optionValue="id" placeholder="Pet" optionLabel="name" [showClear]="true" [style]="{'min-width':'300px'}" [disabled]="!selectedRace">
+                            <ng-template let-pet>
+                                <div class="p-d-flex p-ai-center">
+                                    <div>{{pet.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <div *ngIf="selectedPet">
+                            <small *ngFor="let pet of filteredPets" class="msg">record-{{pet.id}}</small>
+                        </div>
+                        <div *ngIf="caseForm.controls['petId'].invalid && caseForm.controls['petId'].dirty">
+                            <small *ngIf="caseForm.controls['petId'].errors?.required" class="p-error">Pet is required</small>
+                        </div> 
+                    </div>
+                </div>    
+            </div>
+
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <!-- <input class="p-invalid" type="text" pInputText placeholder="Diagnosis" formControlName="diagnosis" [style]="{'min-width':'300px'}">  -->
+                        <textarea [rows]="3" [cols]="36" pInputTextarea autoResize="autoResize" placeholder="Diagnosis" formControlName="diagnosis"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <p-calendar view="month" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" formControlName="date"
+                        [style]="{'min-width':'300px'}"></p-calendar>
+                        <div *ngIf="caseForm.controls['date'].invalid && caseForm.controls['date'].dirty">
+                            <small *ngIf="caseForm.controls['date'].errors?.required" class="p-error">Date is required</small>
+                        </div> 
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <p-multiSelect [options]="vets" formControlName="vetCases" optionValue="id" defaultLabel="Select a Vet" optionLabel="fullName" display="chip"
+                         [style]="{'min-width':'300px'}">
+                            <ng-template let-vet>
+                                <div class="p-d-flex p-ai-center">
+                                    <span>{{vet.fullName}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                        <div *ngIf="caseForm.controls['vetCases'].invalid && caseForm.controls['vetCases'].dirty">
+                            <small *ngIf="caseForm.controls['vetCases'].errors?.required" class="p-error">Vet is required</small>
+                        </div>
+                    </div>
+                </div>    
+            </div>  
+
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <p-multiSelect [options]="petServices" formControlName="casePetServices" optionValue="id" defaultLabel="Select a Service" optionLabel="name" display="chip"
+                         [style]="{'min-width':'300px'}">
+                            <ng-template let-service>
+                                <div class="p-d-flex p-ai-center">
+                                    <span>{{service.name}}</span>
+                                </div>
+                            </ng-template>
+                        </p-multiSelect>
+                        <div *ngIf="caseForm.controls['casePetServices'].invalid && caseForm.controls['casePetServices'].dirty">
+                            <small *ngIf="caseForm.controls['casePetServices'].errors?.required" class="p-error">Service is required</small>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="col-12" formArrayName="therapies">
+                <div class="field-form" *ngFor="let therapyFormGroup of therapiesForm.controls; let i = index">
+                    <div class="formArr" [formGroup]="therapiesForm.controls[i]">
+                        <div class="field-formArr">
+                            <input class="p-invalid" type="text" pInputText placeholder="Drug" formControlName="drug" [style]="{'min-width':'265px'}">
+                            <div *ngIf="therapyFormGroup.controls['drug'].invalid && therapyFormGroup.controls['drug'].dirty">
+                                <small *ngIf="therapyFormGroup.controls['drug'].errors?.required" class="p-error">Drug is required</small>
+                            </div>      
+                        </div>
+                        <div class="field-formArr">        
+                            <input class="p-invalid" type="text" pInputText placeholder="Description" formControlName="description" [style]="{'min-width':'265px'}">
+                            <div *ngIf="therapyFormGroup.controls['description'].invalid && therapyFormGroup.controls['description'].dirty">
+                                <small *ngIf="therapyFormGroup.controls['description'].errors?.required" class="p-error">Description is required</small>
+                            </div> 
+                        </div>
+                        <div class="field-formArr">             
+                            <p-calendar  dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" formControlName="date" [style]="{'min-width':'265px'}"
+                            value="{{ therapyFormGroup.date | date: 'dd/MM/y }}"></p-calendar>
+                            <div *ngIf="therapyFormGroup.controls['date'].invalid && therapyFormGroup.controls['date'].dirty">
+                                <small *ngIf="therapyFormGroup.controls['date'].errors?.required" class="p-error">Date is required</small>
+                            </div> 
+                        </div>     
+                    </div>
+                    <!-- <button pButton type="button" class="p-button-sm p-button-text p-button-secondary" (click)="deleteTherapy(i)">Remove</button> -->
+                    <i class="pi pi-trash" style="font-size: 1.1rem; color: red;" (click)="deleteTherapy(i)"></i>
+                </div>
+                <div class="icon-field">
+                    <!-- <i class="pi pi-plus-circle"  style="font-size: 1.3rem; color: red;" (click)="addTherapiesForm()"></i> -->
+                    <button pButton type="button" class="p-button-sm p-button-text p-button-primary" (click)="addTherapiesForm()">Add Therapy</button>
+                </div>
+            </div>
+
+            <div class="col-12" formArrayName="controls">
+                <div class="field-form" *ngFor="let controlFormGroup of controlsForm.controls; let i = index">
+                    <div class="formArr" [formGroup]="controlsForm.controls[i]">
+                        <div class="field-formArr">
+                            <input class="p-invalid" type="text" pInputText placeholder="Name" formControlName="name" [style]="{'min-width':'265px'}">
+                            <div *ngIf="controlFormGroup.controls['name'].invalid && controlFormGroup.controls['name'].dirty">
+                                <small *ngIf="controlFormGroup.controls['name'].errors?.required" class="p-error">Name is required</small>
+                            </div>      
+                        </div>
+                        <div class="field-formArr">           
+                            <input class="p-invalid" type="text" pInputText placeholder="Description" formControlName="description" [style]="{'min-width':'265px'}">
+                            <div *ngIf="controlFormGroup.controls['description'].invalid && controlFormGroup.controls['description'].dirty">
+                                <small *ngIf="controlFormGroup.controls['description'].errors?.required" class="p-error">Description is required</small>
+                            </div> 
+                        </div>
+                        <div class="field-formArr">             
+                            <p-calendar  dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" formControlName="date" [style]="{'min-width':'265px'}"
+                            value="{{ therapyFormGroup.date | date: 'dd/MM/y }}"></p-calendar>
+                            <div *ngIf="controlFormGroup.controls['date'].invalid && controlFormGroup.controls['date'].dirty">
+                                <small *ngIf="controlFormGroup.controls['date'].errors?.required" class="p-error">Date is required</small>
+                            </div> 
+                        </div>     
+                    </div>
+                    <!-- <button pButton type="button" class="p-button-sm p-button-text p-button-secondary" (click)="deleteControl(i)">Remove</button> -->
+                    <i class="pi pi-trash" style="font-size: 1.1rem; color: red;" (click)="deleteControl(i)"></i> 
+                </div>
+                <div class="icon-field">
+                    <button pButton type="button" class="p-button-sm p-button-text p-button-primary" (click)="addConstrolsForm()">Add Control</button>
+                </div>
+            </div>
+
+            <!-- drag & drop upload -->
+            <app-uploader #fileUploader></app-uploader>
+
+            <div class="col-12">
+                <div class="buttons-field">
+                    <button pButton type="button" class="p-button-sm" (click)="onAddCase()" [disabled]="!caseForm.valid">Add Case</button>
+                    <button pButton type="button" class="p-button-sm p-button-secondary" (click)="onCancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>    

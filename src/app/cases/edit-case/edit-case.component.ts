@@ -61,13 +61,12 @@ export class EditCaseComponent implements OnInit {
     this.caseForm = this.fb.group({
       name: [this.case.name, Validators.required],
       petId: [this.case.petId, Validators.required],
-      diagnosis: [this.case.diagnosis, Validators.required],
+      diagnosis: [this.case.diagnosis],
       date: [formatDate(this.case.date, 'dd/MM/y','en'), Validators.required],
       vetCases: [this.selectedVets, Validators.required],
       casePetServices: [this.seletedServices, Validators.required],
       therapies: this.fb.array([]),
       controls: this.fb.array([]),
-      // xrays: this.case.xrays
     }); 
 
     //therapies form array
@@ -159,7 +158,7 @@ export class EditCaseComponent implements OnInit {
         this.api.delete("/api/cases/" + this.case.id)
         .subscribe(() => {
           this.router.navigate(['cases'])
-          this._snackBar.open(modalCase.name + ' is deleted', 'End now', {
+          this._snackBar.open(modalCase.name + ' is deleted', 'OK', {
             duration: 5000,
             verticalPosition: this.verticalPosition
           });
@@ -167,11 +166,7 @@ export class EditCaseComponent implements OnInit {
       }
     })
   }
-
-  // onGetUrls() {
-  //   this.fileUploader.getUploaded();
-  // }
-
+  
   onCancel() {
     this.router.navigate(['cases'])
   }
