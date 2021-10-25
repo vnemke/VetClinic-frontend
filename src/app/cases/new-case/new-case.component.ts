@@ -1,20 +1,18 @@
-import { formatDate } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ApiService } from 'src/app/api.service';
-import { ModalComponent } from 'src/app/modal/modal.component';
-import { PetService } from 'src/app/pet-services/pet-service';
-import { Pet } from 'src/app/pets/pet';
+import { ApiService } from '@vetclinic-app/api.service';
+import { PetService } from '@vetclinic-app/pet-services/pet-service';
+import { Pet } from '@vetclinic-app/pets/pet';
 import { Case } from '../case';
 import { Control } from '../control';
 import { Therapy } from '../therapy';
 import { Vet } from '../vet';
 import { Xray } from '../xray';
-import { Animal } from '../../pets/animal'
-import { Race } from 'src/app/pets/race';
+import { Animal } from '@vetclinic-app/pets/animal'
+import { Race } from '@vetclinic-app/pets/race';
 
 @Component({
   selector: 'app-new-case',
@@ -39,6 +37,7 @@ export class NewCaseComponent implements OnInit {
   selectedAnimal: boolean;
   selectedRace: boolean;
   selectedPet: boolean;
+  selectedPetId: any;
 
   @ViewChild('fileUploader') fileUploader: any;
 
@@ -96,23 +95,23 @@ export class NewCaseComponent implements OnInit {
         this.selectedRace = false;
       } else {
         var result = this.pets.filter(p => p.raceId == raceId);
-        console.log(result);
+        console.log('filpets',result);
         this.filteredPets = result;
         this.selectedRace = true;
+        this.selectedPetId = null;
       }
     })
 
     this.caseForm.get('petId')?.valueChanges
     .subscribe((petId) => {
       if (petId == null) {
-        this.selectedPet = false
+        this.selectedPet = false;
       } else {
-        this.selectedPet = true
+        this.selectedPet = true;
+        this.selectedPetId = petId;
       }
     })
   }
-
-  
 
   //therapies form array
   get therapiesForm() {
@@ -121,9 +120,9 @@ export class NewCaseComponent implements OnInit {
 
   addTherapiesForm() {
     const therapyFormGroup = this.fb.group({
-      drug: ['',Validators.required],
-      description: ['',Validators.required],
-      date: ['',Validators.required],
+      drug: ['', Validators.required],
+      description: ['', Validators.required],
+      date: ['', Validators.required],
     });
     this.therapiesForm.push(therapyFormGroup);
   }
@@ -139,9 +138,9 @@ export class NewCaseComponent implements OnInit {
 
   addConstrolsForm() {
     const controlFormGroup = this.fb.group({
-      name: ['',Validators.required],
-      description: ['',Validators.required],
-      date: ['',Validators.required]
+      name: ['', Validators.required],
+      description: ['', Validators.required],
+      date: ['', Validators.required]
     });
     this.controlsForm.push(controlFormGroup);
   }
@@ -163,7 +162,7 @@ export class NewCaseComponent implements OnInit {
     this.api.post("/api/cases/", body)
     .subscribe(
       () => {
-        this.router.navigate(['cases']) 
+        this.router.navigate(['/app/cases']) 
         this._snackBar.open('Case is aded', 'OK', {
           duration: 5000,
           verticalPosition: this.verticalPosition
@@ -173,7 +172,6 @@ export class NewCaseComponent implements OnInit {
   }
  
   onCancel() {
-    this.router.navigate(['cases'])
+    this.router.navigate(['/app/cases'])
   }
-
 }

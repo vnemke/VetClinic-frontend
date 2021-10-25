@@ -41,7 +41,7 @@ export class PetsListComponent implements OnInit {
   }
 
   onAddPet() {
-    this.router.navigate(['pets/add'])
+    this.router.navigate(['/app/pets/add'])
   }
 
   onShowAll() {

@@ -1,22 +1,27 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { LoginPageComponent } from './auth/components/login-page/login-page.component';
 
 const routes: Routes = [
   {
-    path: 'users',
-    loadChildren: () => import('./users/users.module').then(m => m.UsersModule)
+    path: 'app',
+    loadChildren: () => import('./layout/core-app.module').then(m => m.CoreAppModule),
+    data: { canAccess: ['*'] },
+    //canActivate: [AuthenticationGuard]
   },
   {
-    path: 'pets',
-    loadChildren: () => import('./pets/pets.module').then(m => m.PetsModule)
+    path: 'auth',
+    redirectTo: 'auth/login',
+    data: { canAccess: ['*'] }
   },
   {
-    path: 'pet-services',
-    loadChildren: () => import('./pet-services/pet-services.module').then(m => m.PetServicesModule)
+    path: 'auth/login',
+    component: LoginPageComponent,
+    data: { canAccess: ['*'] }
   },
   {
-    path: 'cases',
-    loadChildren: () => import('./cases/cases.module').then(m => m.CasesModule)
+    path: '**',
+    redirectTo: 'app/application-form'
   }
 ];
 

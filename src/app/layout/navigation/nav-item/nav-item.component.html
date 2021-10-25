@@ -1,0 +1,19 @@
+<ng-container *ngIf="!item.hidden">
+    
+    <!-- item.url -->
+    <a class="nav-link" [ngClass]="item.classes" *ngIf="item.url && !item.externalUrl && !item.function" [routerLink]="[item.url]"
+        [routerLinkActive]="['active', 'accent']" [routerLinkActiveOptions]="{exact: item.exactMatch || false}"
+        [target]="item.openInNewTab ? '_blank' : '_self'">
+        <ng-container *ngTemplateOutlet="itemContent"></ng-container>
+    </a>
+
+    <ng-template #itemContent>
+        <!-- <mat-icon class="nav-link-icon" [svgIcon]="'heroicons_outline:'+item.icon" *ngIf="item.icon"></mat-icon> -->
+        <mat-icon class="nav-link-icon" *ngIf="item.icon" fontSet="material-icons-outlined">{{item.icon}}</mat-icon>
+        <span class="nav-link-title">{{item.title}}</span>
+        <span class="nav-link-badge" *ngIf="item.badge" [ngStyle]="{'background-color': item.badge.bg,'color': item.badge.fg}">
+            {{item.badge.title}}
+        </span>
+    </ng-template>
+
+</ng-container>

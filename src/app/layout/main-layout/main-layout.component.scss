@@ -1,0 +1,40 @@
+:host {
+    position: relative;
+    //display: flex;
+    //-webkit-box-flex: 1;
+    //flex: 1 1 0%;
+    display: block; //changed when toolbare moved inside router-outlet
+    min-width: 0;
+    width: 100%;
+    min-height: 0;
+    
+    .main-content-wrap {
+      min-height: calc(100vh - 64px);
+      background-size: 500px;
+      padding-top: 80px;
+      background-position: bottom right;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position-x: calc(100% + 80px);
+      //background-position-y: calc(100% + 70px);
+      background-position-y: -80px;
+      //background-image: url('../../../assets/images/logos/link.svg');
+      // background-image: url(../../../assets/images/logos/linkrot.svg);
+    }
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 998;
+        background: #000;
+        opacity: 0;
+        display: none;
+        &.show {
+          @media screen and (max-width: 768px) {
+            display: block;
+          }
+        }
+      }
+}

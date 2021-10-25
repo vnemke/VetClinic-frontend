@@ -22,7 +22,7 @@
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th class="shown-columns">Id</th>
+                <th class="shown-columns">Record</th>
                 <th pSortableColumn="name" class="shown-columns">Name<p-sortIcon field="name" ></p-sortIcon></th>
                 <th class="shown-columns">Animal</th>
                 <th class="shown-columns-race"> Race</th>
@@ -35,7 +35,7 @@
             <tr>
                 <td class="shown-columns">{{pet.id}}</td>
                 <td class="shown-columns">
-                    <a [routerLink] = "['/pets', pet.id]">
+                    <a [routerLink] = "['/app/pets', pet.id]">
                         {{pet.name}}
                     </a>
                 </td>

@@ -32,11 +32,8 @@
             <div class="col-12">
                 <div class="field-container">
                     <div class="field">
-                        <p-calendar view="month" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" formControlName="date"
-                        value="{{ case.date | date: 'dd/MM/y' }}" [style]="{'min-width':'300px'}"></p-calendar>
-                        <div *ngIf="caseForm.controls['date'].invalid && caseForm.controls['date'].dirty">
-                            <small *ngIf="caseForm.controls['date'].errors?.required" class="p-error">Date is required</small>
-                        </div> 
+                        <p-calendar dateFormat="dd/mm/yy" formControlName="date"
+                        value="{{ case.date | date: 'dd/MM/y' }}"  [showIcon]="true" [style]="{'min-width':'300px'}"></p-calendar>
                     </div>
                 </div>
             </div>
@@ -77,35 +74,7 @@
                 </div>    
             </div>
 
-            <div class="col-12" formArrayName="therapies">
-                <div class="field-form" *ngFor="let therapyFormGroup of therapiesForm.controls; let i = index">
-                    <div class="formArr" [formGroup]="therapiesForm.controls[i]">
-                        <div class="field-formArr">
-                            <input class="p-invalid" type="text" pInputText placeholder="Drug" formControlName="drug" [style]="{'min-width':'265px'}">
-                            <div *ngIf="therapyFormGroup.controls['drug'].invalid && therapyFormGroup.controls['drug'].dirty">
-                                <small *ngIf="therapyFormGroup.controls['drug'].errors?.required" class="p-error">Drug is required</small>
-                            </div>      
-                        </div>
-                        <div class="field-formArr">        
-                            <input class="p-invalid" type="text" pInputText placeholder="Description" formControlName="description" [style]="{'min-width':'265px'}">
-                        </div>
-                        <div class="field-formArr">             
-                            <p-calendar  dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" formControlName="date" [style]="{'min-width':'265px'}"
-                            value="{{ therapyFormGroup.date | date: 'dd/MM/y }}"></p-calendar>
-                            <div *ngIf="therapyFormGroup.controls['date'].invalid && therapyFormGroup.controls['date'].dirty">
-                                <small *ngIf="therapyFormGroup.controls['date'].errors?.required" class="p-error">Date is required</small>
-                            </div> 
-                        </div>     
-                    </div>
-                    <!-- <button pButton type="button" class="p-button-sm p-button-text p-button-secondary" (click)="deleteTherapy(i)">Remove</button> -->
-                    <i class="pi pi-trash" style="font-size: 1.1rem; color: red;" (click)="deleteTherapy(i)"></i>
-                </div>
-                <div class="icon-field">
-                    <!-- <i class="pi pi-plus-circle"  style="font-size: 1.3rem; color: red;" (click)="addTherapiesForm()"></i> -->
-                    <button pButton type="button" class="p-button-sm p-button-text p-button-primary" (click)="addTherapiesForm()">Add Therapy</button>
-                </div>
-            </div>
-
+            <!-- formArr controls -->
             <div class="col-12" formArrayName="controls">
                 <div class="field-form" *ngFor="let controlFormGroup of controlsForm.controls; let i = index">
                     <div class="formArr" [formGroup]="controlsForm.controls[i]">
@@ -119,19 +88,50 @@
                             <input class="p-invalid" type="text" pInputText placeholder="Description" formControlName="description" [style]="{'min-width':'265px'}">
                         </div>
                         <div class="field-formArr">             
-                            <input class="p-invalid" type="text" pInputText placeholder="Date" formControlName="date" [style]="{'min-width':'265px'}">    
+                            <p-calendar dateFormat="dd/mm/yy" formControlName="date" [style]="{'min-width':'265px'}" [showIcon]="true"
+                            value="{{ controlFormGroup.date | date: 'dd/MM/y }}" placeholder="Date"></p-calendar>
+                            <div *ngIf="controlFormGroup.controls['date'].invalid && controlFormGroup.controls['date'].dirty">
+                                <small *ngIf="controlFormGroup.controls['date'].errors?.required" class="p-error">Date is required</small>
+                            </div>    
                         </div>      
                     </div>
-                    <!-- <button pButton type="button" class="p-button-sm p-button-text p-button-secondary" (click)="deleteControl(i)">Remove</button> -->
                     <i class="pi pi-trash" style="font-size: 1.1rem; color: red;" (click)="deleteControl(i)"></i> 
                 </div>
                 <div class="icon-field">
                     <button pButton type="button" class="p-button-sm p-button-text p-button-primary" (click)="addConstrolsForm()">Add Control</button>
                 </div>
             </div>
+
+            <!-- formArr therapies -->
+            <div class="col-12" formArrayName="therapies">
+                <div class="field-form" *ngFor="let therapyFormGroup of therapiesForm.controls; let i = index">
+                    <div class="formArr" [formGroup]="therapiesForm.controls[i]">
+                        <div class="field-formArr">
+                            <input class="p-invalid" type="text" pInputText placeholder="Drug" formControlName="drug" [style]="{'min-width':'265px'}">
+                            <div *ngIf="therapyFormGroup.controls['drug'].invalid && therapyFormGroup.controls['drug'].dirty">
+                                <small *ngIf="therapyFormGroup.controls['drug'].errors?.required" class="p-error">Drug is required</small>
+                            </div>      
+                        </div>
+                        <div class="field-formArr">        
+                            <input class="p-invalid" type="text" pInputText placeholder="Description" formControlName="description" [style]="{'min-width':'265px'}">
+                        </div>
+                        <div class="field-formArr">             
+                            <p-calendar dateFormat="dd/mm/yy" formControlName="date" [style]="{'min-width':'265px'}" [showIcon]="true"
+                            value="{{ therapyFormGroup.date | date: 'dd/MM/y }}" placeholder="Date"></p-calendar>
+                            <div *ngIf="therapyFormGroup.controls['date'].invalid && therapyFormGroup.controls['date'].dirty">
+                                <small *ngIf="therapyFormGroup.controls['date'].errors?.required" class="p-error">Date is required</small>
+                            </div> 
+                        </div>     
+                    </div>
+                    <i class="pi pi-trash" style="font-size: 1.1rem; color: red;" (click)="deleteTherapy(i)"></i>
+                </div>
+                <div class="icon-field">
+                    <button pButton type="button" class="p-button-sm p-button-text p-button-primary" (click)="addTherapiesForm()">Add Therapy</button>
+                </div>
+            </div>
+
             <!-- drag & drop upload -->
             <app-uploader #fileUploader [xrays]="case.xrays"></app-uploader>
-            <!-- <button pButton type="button" class="p-button-sm" (click)="onGetUrls()">Get Urls</button>  -->
 
             <div class="col-12">
                 <div class="buttons-field">

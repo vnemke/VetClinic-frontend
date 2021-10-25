@@ -29,7 +29,7 @@ export class PetServicesListComponent implements OnInit {
   }
 
   onAddService() {
-    this.router.navigate(['pet-services/add'])
+    this.router.navigate(['/app/pet-services/add'])
   }
 
 }

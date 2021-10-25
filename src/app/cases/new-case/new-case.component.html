@@ -49,7 +49,8 @@
             <div class="col-12">
                 <div class="field-container">
                     <div class="field">
-                        <p-dropdown [options]="filteredPets" formControlName="petId" optionValue="id" placeholder="Pet" optionLabel="name" [showClear]="true" [style]="{'min-width':'300px'}" [disabled]="!selectedRace">
+                        <p-dropdown [options]="filteredPets" formControlName="petId" [(ngModel)]="selectedPetId" optionValue="id" placeholder="Pet" optionLabel="name"
+                         [showClear]="true" [style]="{'min-width':'300px'}" [disabled]="!selectedRace">
                             <ng-template let-pet>
                                 <div class="p-d-flex p-ai-center">
                                     <div>{{pet.name}}</div>
@@ -57,7 +58,7 @@
                             </ng-template>
                         </p-dropdown>
                         <div *ngIf="selectedPet">
-                            <small *ngFor="let pet of filteredPets" class="msg">record-{{pet.id}}</small>
+                            <small class="msg" *ngIf="selectedPetId">record-{{selectedPetId}}</small>
                         </div>
                         <div *ngIf="caseForm.controls['petId'].invalid && caseForm.controls['petId'].dirty">
                             <small *ngIf="caseForm.controls['petId'].errors?.required" class="p-error">Pet is required</small>
@@ -78,7 +79,7 @@
             <div class="col-12">
                 <div class="field-container">
                     <div class="field">
-                        <p-calendar view="month" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" formControlName="date"
+                        <p-calendar view="month" dateFormat="dd/mm/yy" [yearNavigator]="true" yearRange="2000:2030" placeholder="Date" formControlName="date"
                         [style]="{'min-width':'300px'}"></p-calendar>
                         <div *ngIf="caseForm.controls['date'].invalid && caseForm.controls['date'].dirty">
                             <small *ngIf="caseForm.controls['date'].errors?.required" class="p-error">Date is required</small>

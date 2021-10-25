@@ -15,7 +15,6 @@ import { PetServicesResolver } from './pet-services.resolver';
 import { PetsResolver } from '../pets/pets.resolver';
 import { UploaderComponent } from './uploader/uploader.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
-
 import { DndDirective } from './uploader/dnd.directive';
 import { FileSizePipe } from './upload-file/filesize.pipe';
 import { AnimalsResolver } from '../pets/animals.resolver';

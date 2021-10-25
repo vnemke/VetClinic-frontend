@@ -1,0 +1,68 @@
+:host {
+
+    width: 100%;
+    display: block;
+
+    .group-title {
+        color: rgba(255,255,255,0.85);
+        position: relative;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-align: center;
+        align-items: center;
+        height: 48px;
+        font-weight: 400;
+        padding-left: 19px;
+        margin-top: 8px;
+        opacity: 0.7;
+        font-size: 14px;
+        white-space: nowrap;
+        text-transform: uppercase;
+        span {
+            opacity: 0.78;
+        }
+    }
+
+    .docked & {
+ 
+         > .group-title {
+             align-items: center;
+ 
+             > span {
+                 opacity: 0;
+                 transition: opacity 200ms ease;
+             }
+ 
+             &:before {
+                 content: '';
+                 display: block;
+                 position: absolute;
+                 min-width: 1.6rem;
+                 border-top: 2px solid;
+                 opacity: 0.78;
+             }
+         }
+    }
+
+    .docked:hover & {
+ 
+        > .group-title {
+            align-items: center;
+
+            > span {
+                opacity: 0.78;
+            }
+
+            &:before {
+                content: '';
+                display: none;
+                position: absolute;
+                min-width: 1.6rem;
+                border-top: 2px solid;
+                opacity: 0;
+            }
+        }
+    }
+
+}
+ 

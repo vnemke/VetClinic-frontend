@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from 'src/app/api.service';
+import { ApiService } from '@vetclinic-app/api.service';
 import { PetService } from '../pet-service';
 
 @Component({
@@ -35,7 +35,7 @@ export class NewPetServiceComponent implements OnInit {
     this.api.post("/api/petservices", this.petServiceForm.value)
     .subscribe(
       () => {
-        this.router.navigate(['pet-services'])
+        this.router.navigate(['/app/pet-services'])
         this._snackBar.open('pet service is added', 'OK', {
           duration: 5000,
           verticalPosition: this.verticalPosition
@@ -45,6 +45,6 @@ export class NewPetServiceComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['pet-services'])
+    this.router.navigate(['/app/pet-services'])
   }
 }

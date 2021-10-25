@@ -1,0 +1,40 @@
+
+<div class="row justify-content-between">
+    <div class="col-auto burger-field">
+        <button mat-icon-button (click)="toggleMenuMobile()" class="mobile-open">
+            <mat-icon>menu</mat-icon>
+        </button>
+    </div>
+ 
+    <div class="col-auto">
+        <button mat-button [matMenuTriggerFor]="userMenu" class="user-button">
+            
+            <div class="button-field">
+                <div class="user-b-info">
+                    <span class="username">Full Name</span>
+                    <div class="user-role">Rola <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="user-status" role="img"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="#0e85b3" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
+                            </path>
+                        </svg></div>
+                </div>
+                <div class="avatar-letter">Full Name</div>    
+            </div>
+        </button>
+    
+        <mat-menu #userMenu="matMenu" [overlapTrigger]="false">
+    
+            <button mat-menu-item [routerLink]="['/app/my-profile']">
+                <mat-icon>account_circle</mat-icon>
+                <span>Change password</span>
+            </button>
+    
+            <button mat-menu-item class="" (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Logout</span>
+            </button>
+    
+        </mat-menu>
+    </div>
+   
+</div>

@@ -1,14 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
+html, body { height: 100%; }
+
 body {
+    margin: 0;
+    font-family: "Segoe UI", Helvetica; 
     padding: 2rem;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 .p-datatable table {
     table-layout: auto !important;
 }
-
-
 
 .mat-snack-bar-container {
     color: gray;
@@ -29,3 +30,62 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
         padding:0;
     }
 }
+
+// body {
+//     background-color: #F7F9FC;
+// 	@media screen and (min-width: 1290px){
+// 		.app-navbar-content {
+// 			overflow-y: scroll; 
+//             scrollbar-width: thin;
+//             scrollbar-color: transparent  rgba(0, 0, 0, 0.01);
+// 		    //scrollbar-color: rgba(0, 0, 0, 0) rgba(170, 170, 170, 0);
+//          }
+         
+// 		.app-navbar-content::-webkit-scrollbar {
+// 			width: 8px;
+//         }
+//         .app-navbar-content::-webkit-scrollbar-thumb {
+//             border: 2px solid #2a3135;
+//         }
+
+
+
+//         .docked .app-navbar-content{
+//             scrollbar-width: none;
+//         }
+// 		.docked .app-navbar-content::-webkit-scrollbar {
+//             width: 0;
+//             //transition: all .2s ease;
+//         }
+        
+
+//         .docked:hover .app-navbar-content {
+//             scrollbar-width: thin;
+//         }
+// 		.docked:hover .app-navbar-content::-webkit-scrollbar {
+// 			width: 8px;
+//         }
+//         .app-navbar-content::-webkit-scrollbar-thumb {
+//             border: 2px solid #2a3135;
+//         }
+
+
+        
+// 		.app-navbar:hover  .app-navbar-content {
+//             scrollbar-color: rgb(170,170,170)  rgba(0, 0, 0, 0.01);
+//             scrollbar-width: thin;
+
+// 		}
+// 		.app-navbar-content::-webkit-scrollbar-track {
+// 			background: rgba(0, 0, 0, 0.02);
+// 		}
+// 		.app-navbar-content::-webkit-scrollbar-thumb {
+// 			background-color: rgba(170, 170, 170, 0);
+// 			border-radius: 3px;
+// 		}
+// 		.app-navbar:hover .app-navbar-content::-webkit-scrollbar-thumb {
+// 			background-color: rgba(170, 170, 170, 0.65) !important;
+// 		}
+// 	}
+// }
+

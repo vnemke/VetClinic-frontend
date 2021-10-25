@@ -44,7 +44,7 @@ export class CasesListComponent implements OnInit {
   }
 
   onAddCase() {
-    this.router.navigate(['cases/add'])
+    this.router.navigate(['/app/cases/add'])
   }
 
   onShowAll() {

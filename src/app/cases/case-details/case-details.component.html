@@ -1,54 +1,144 @@
-<!-- <div ngFor="let case of cases">{{case.name}}</div>
-<div ngFor="let case of cases">{{case.diagnosis}}</div> -->
-
-
-<p-card>
-    <ng-template pTemplate="header">
-        {{case.name}}
-    </ng-template>
-    Body Content
-    <ng-template pTemplate="footer">
-        {{case.diagnosis}}
-    </ng-template>
-</p-card>
-
 <div class="details">
     <div class="container">
         <div class="row">
+            <div class="card-container">
+                <div class="col-12">
+                    <div class="header-field">
+                        <div class="header">Record-{{case.pet.id}}</div>
+                    </div>
+                </div>
+                
+                <div class="col-12">
+                    <div class="card">
+                        <label for="" class="header">Case</label>
+                        {{case.name}}
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="col-12">
+                    <div class="card">
+                        <label for="" class="header">Pet name</label>
+                        {{case.pet.name}}
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12">
+                    <div class="card">
+                        <label for="" class="header">Owner</label>
+                        {{case.pet.owner.fullName}}
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12 card">
+                    <label for="" class="header">Veterinarian</label>
+                    <div *ngFor="let vc of case.vetCases">
+                        {{vc.vet.fullName}}
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12">
+                    <div class="card">
+                        <label for="" class="header">Date</label>
+                        {{case.date |  date: 'dd.MM.y.'}}
+                    </div>
+                </div>
+                <hr>
+               
+                <div class="col-12 card">
+                    <label for="" class="header">Service</label>
+                    <div *ngFor="let cs of case.casePetServices">
+                        {{cs.petService.name}}  
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12">
+                    <div class="card">
+                    <label for="" class="header">Diagnosis</label>
+                    {{case.diagnosis}}               
+                    </div>
+                </div>
+                <hr>
+                <div class="col-12" *ngIf="case.therapies.length">
+                    <div class="header-field">
+                        <div class="header">Therapies</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12"  *ngFor="let t of case.therapies">
+                            <div class="card">
+                                <div class="card-field">
+                                    <label for="" class="card-header">Date</label>
+                                    {{t.date | date: 'dd.MM.y.'}}
+                                </div>    
+                                <div class="card-field">
+                                    <label for="" class="card-header">Description</label>
+                                    {{t.description}}
+                                </div>
+                                <div class="card-field">
+                                    <label for="" class="card-header">Drug</label>
+                                    {{t.drug}}
+                                </div>    
+                            </div>
+                        </div>
+                    </div>    
+                    <hr>
+                </div>
+            
+                <div class="col-12" *ngIf="case.controls.length">
+                    <div class="header-field">
+                        <div class="header">Controls</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let c of case.controls">
+                            <div class="card">
+                                <div class="card-field">
+                                    <label for="" class="card-header">Name</label>
+                                    {{c.name}}
+                                </div>
+                                <div class="card-field">
+                                    <label for="" class="card-header">Date</label>
+                                    {{c.date | date: 'dd.MM.y.'}}
+                                </div>
+                                <div class="card-field">  
+                                    <label for="" class="card-header">Description</label>
+                                    {{c.description}}
+                                </div>  
+                            </div>
+                        </div>
+                    </div>   
+                </div>
+
+                <div class="col-12" *ngIf="case.xrays.length">
+                    <hr>  
+                    <div class="header-field">
+                        <div class="header">Documentation</div>
+                    </div>   
+                    <div class="file-field">
+                        <div class="row">
+                            <div class="col-lg-2 col-md-6 col-sm-12" *ngFor="let x of case.xrays">
+                                <a href="https://localhost:44369/MyImages/{{x.fileName}}" title="{{x.fileName}}">
+                                    <div class="name">
+                                    {{x.fileName}}
+                                    </div>
+                                </a>
+                            </div>    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+  
+        <div class="pdfbutton-field">
+            <button pButton type="button" class="p-button-text p-button-plain" (click)="onPDF()">PDF Receipt</button>
+        </div>
+       
+
+        <div class="row">
             <div class="col-12">
-                <label for="">Case</label>
-                {{case.name}}
-            </div>
-            <div class="col-12">
-                {{case.pet.name}}
-            </div>
-            <div class="col-12" *ngFor="let vc of case.vetCases">
-                {{vc.vet.fullName}}
-            </div>
-            <div class="col-12">
-                {{case.date}}
-            </div>
-            <div class="col-12">
-                {{case.diagnosis}}
-            </div>
-            <div class="col-12" *ngFor="let t of case.therapies">
-                {{t.date}}
-                {{t.description}}
-                {{t.drug}}
-            </div>
-            <div class="col-12" *ngFor="let c of case.controls">
-                {{c.name}}
-                {{c.date}}
-                {{c.description}}
-            </div>
-            <div class="col-12">
-                {{case.description}}
-            </div>
-            <div class="col-12" *ngFor="let cs of case.casePetServices">
-                {{cs.petService.name}}
-            </div>
-            <div class="col-12">
-                {{case.xrays}}
+                <div class="buttons-field">
+                    <button pButton type="button" class="p-button-sm" (click)="onEdit()">Edit Case</button>
+                    <button pButton type="button" class="p-button-sm p-button-secondary" (click)="onCancel()">Cancel</button>
+                </div>
             </div>
         </div>
     </div>

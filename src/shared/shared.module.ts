@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -19,6 +18,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
 import { MatRadioModule } from '@angular/material/radio';
 import { CalendarModule } from 'primeng/calendar';
+
 import { DropdownModule } from 'primeng/dropdown';
 import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
@@ -28,6 +28,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { CardModule } from 'primeng/card';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -59,7 +61,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 		MultiSelectModule,
 		ProgressBarModule,
 		CardModule,
-		InputTextareaModule
+		InputTextareaModule,
+		MatIconModule,
+		MatMenuModule
 	],
 	exports: [
 		CommonModule, 
@@ -87,7 +91,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 		MultiSelectModule,
 		ProgressBarModule,
 		CardModule,
-		InputTextareaModule
+		InputTextareaModule,
+		MatIconModule,
+		MatMenuModule
 	],
 	providers: [
 		{provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { hasBackdrop: false }},

@@ -1,0 +1,37 @@
+<div class="sidenav-menu">
+    <div class="navbar-controls">
+        <div class="navbar-logo">
+            <img class="e-logo" src="./assets/images/logos/logo-w.svg" alt="">
+            <img class="e-txt-logo" src="./assets/images/logos/logo-w-text.svg" alt="">
+        </div>
+        <div class="nav-buttons">
+            <button mat-icon-button (click)="toggleSidenav()" class="toggle-button">
+                <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="app-navbar-content">
+        <!-- <div class="sidenav-header">
+            <div class="avatar-body">
+
+                <div class="avatar-letter">S</div>
+                <div class="avatar-info">
+                    <div>Ime Prezime</div>
+                    <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="avatar-status" role="img"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="#0e85b3" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z"></path>
+                    </svg>
+                    <span class="avatar-role">Rola</span>
+                </div>
+            </div>
+        </div> -->
+        <div *ngFor="let item of navigation" class="sidenav-body">
+            <app-nav-group *ngIf="item.type=='group'" [item]="item" id="{{item.id}}"></app-nav-group>
+            <!-- 
+        <app-nav-collapse *ngIf="item.type=='collapsable'" [item]="item" id="{{item.id}}"></app-nav-collapse>
+        <app-nav-item *ngIf="item.type=='item'" [item]="item" id="{{item.id}}"></app-nav-item>
+        -->
+        </div>
+    </div>
+
+</div>

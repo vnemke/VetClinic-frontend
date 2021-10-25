@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ApiService } from 'src/app/api.service';
-import { ModalComponent } from 'src/app/modal/modal.component';
+import { ApiService } from '@vetclinic-app/api.service';
+import { ModalComponent } from '@vetclinic-app/modal/modal.component';
 import { PetService } from '../pet-service';
 
 @Component({
@@ -39,7 +39,7 @@ export class EditPetServiceComponent implements OnInit {
     this.api.update("/api/petservices/" + this.petService.id, body)
       .subscribe(
         () => {
-        this.router.navigate(['pet-services']) 
+        this.router.navigate(['/app/pet-services']) 
           this._snackBar.open(this.petService.name + ' is edited', 'OK', {
             duration: 5000,
             verticalPosition: this.verticalPosition
@@ -57,7 +57,7 @@ export class EditPetServiceComponent implements OnInit {
       if (res) {
         this.api.delete("/api/petservices/" + this.petService.id)
         .subscribe(() => {
-          this.router.navigate(['pet-services'])
+          this.router.navigate(['/app/pet-services'])
           this._snackBar.open(modalPetService.name + ' is deleted', 'OK', {
             duration: 5000,
             verticalPosition: this.verticalPosition
@@ -68,6 +68,6 @@ export class EditPetServiceComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['pet-services'])
+    this.router.navigate(['/app/pet-services'])
   }
 }

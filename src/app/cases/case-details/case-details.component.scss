@@ -1,0 +1,107 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+}
+
+.card-container {
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #323130;
+    box-shadow: rgb(0 0 0 / 13%) 0px 1.6px 3.6px 0px, rgb(0 0 0 / 11%) 0px 0.3px 0.9px 0px;
+    border-radius: 2
+}
+
+.header {
+    font-weight: bold;
+}
+
+.field {
+    display: flex;
+    flex-direction: row;
+}
+
+hr {
+    color: #ddd;
+    background-color: #ddd;
+    height: 1px;
+    border: none;
+    max-width: 100%;
+}
+
+.header-field {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: .3rem;
+}
+
+.buttons-field {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.pdfbutton-field {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: .5rem;
+}
+
+.card-field {
+    padding: .2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-header {
+    font-weight: bold;
+}
+
+.p-button-sm {
+    margin: 0.3rem
+}
+
+.name {
+    position: relative;
+    padding: 30px;
+    padding-left: 40px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        background-image: url("/assets/svg/file.svg");
+        background-repeat: no-repeat;
+        background-size: contain;
+        width: 30px;
+        height: 40px;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a[href$=".doc"], a[href$=".docx"] {
+    .name:before {background-image: url("/assets/svg/doc.svg")};
+}
+
+a[href$=".pdf"] {
+    .name:before {background-image: url("/assets/svg/pdf.svg")};
+}
+
+a[href$=".jpg"], a[href$=".png"], a[href$=".jpeg"] {
+    .name:before {background-image: url("/assets/svg/jpg.svg")};
+}
+
+.file-field {
+    padding: .6rem;
+}
+
+

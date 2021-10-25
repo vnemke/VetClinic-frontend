@@ -1,11 +1,11 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from 'src/app/api.service';
+import { ApiService } from '@vetclinic-app/api.service';
 import { Role } from '../Role';
 import { User } from '../User';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
-import { ModalComponent } from '../../modal/modal.component';
+import { ModalComponent } from '@vetclinic-app/modal/modal.component';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({

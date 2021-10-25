@@ -26,25 +26,24 @@
                 <th pSortableColumn="date" class="shown-columns">Date<p-sortIcon field="date" ></p-sortIcon></th>
                 <th class="show-columns">Pet</th>
                 <th class="hide-columns" [class.show]="showAll">Animal</th>
-                <!-- <th class="hide-columns" [class.show]="showAll">Race</th> -->
-                <!-- <th class="hide-columns" [class.show]="showAll">Service</th> -->
                 <th class="hide-columns" [class.show]="showAll">Vet</th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-case let-expanded="expanded">
             <tr>
                 <td class="shown-columns" >
-                    <a [routerLink] = "['/cases/edit', case.id]">
+                    <a [routerLink] = "['/app/cases', case.id]">
                         {{case.name}}
                     </a>
                 </td>
                 <td class="show-columns" >{{case.date | date:'dd/MM/y'}}</td>
                 <td class="show-columns" >{{case.pet.name}}</td>
                 <td class="hide-columns" [class.show]="showAll">{{case.pet.race.animal.name}}</td>
-                <!-- <td class="shown-columns">{{case.pet.race.name}}</td> -->
-
-                <!-- <td class="hide-columns" [class.show]="showAll" *ngFor="let cps of case.casePetServices">{{cps.petService.name}}</td> -->
-                <td class="hide-columns" [class.show]="showAll" *ngFor="let vc of case.vetCases">{{vc.vet.fullName}}</td>
+                <td class="hide-columns" [class.show]="showAll">
+                    <div class="vets" *ngFor="let vc of case.vetCases">
+                        {{vc.vet.fullName}}<span>,</span>
+                    </div>
+                </td>
             </tr>
         </ng-template>
     </p-table>

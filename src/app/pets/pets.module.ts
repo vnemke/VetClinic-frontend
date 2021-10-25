@@ -1,7 +1,7 @@
 import { NgModule , CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { PetsListComponent } from './pets-list/pets-list.component';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from 'src/shared/shared.module';
+import { SharedModule } from '../../shared/shared.module';
 import { PetsResolver } from './pets.resolver';
 import { AnimalsResolver } from './animals.resolver';
 import { OwnersResolver } from './owners.resolver';
