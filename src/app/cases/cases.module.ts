@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { CasesListComponent } from './cases-list/cases-list.component';
 import { NewCaseComponent } from './new-case/new-case.component';
 import { EditCaseComponent } from './edit-case/edit-case.component';
-import { SharedModule } from 'src/shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { CasesResolver } from './cases.resolver';
 import { CaseResolver } from './case.resolver';
 import { CaseDetailsComponent } from './case-details/case-details.component';

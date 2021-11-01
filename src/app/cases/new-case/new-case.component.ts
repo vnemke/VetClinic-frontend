@@ -3,7 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from 'primeng/dynamicdialog';
-import { ApiService } from '@vetclinic-app/api.service';
+import { ApiService } from '@vetclinic-app/core/services/api.service';
 import { PetService } from '@vetclinic-app/pet-services/pet-service';
 import { Pet } from '@vetclinic-app/pets/pet';
 import { Case } from '../case';

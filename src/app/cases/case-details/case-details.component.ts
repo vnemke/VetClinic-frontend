@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '@vetclinic-app/api.service';
+import { ApiService } from '@vetclinic-app/core/services/api.service';
 import { Case } from '../case';
 
 @Component({

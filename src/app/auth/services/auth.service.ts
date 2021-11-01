@@ -3,12 +3,39 @@ import { ILoginCredentials, IAuthResponse } from '../model';
 // import { ApiService } from '../../core/services/api.service';
 // import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
+import { AuthData } from '../model/authData.model';
+import { ApiService } from '@vetclinic-app/core/services/api.service';
 // import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
+
+  isAuth: boolean;
+
+  constructor(private api: ApiService, private _router: Router) {
+    if(localStorage.getItem('token')) {
+			this.isAuth = true;
+		} else {
+			this.isAuth = false;
+		}
+  }
+
+  getToken() {
+		return localStorage.getItem('token');
+	}
+
+	logIn(username: string, password: string) {
+		const authData: AuthData = {username: username, password: password}
+		return this.api.post('api/auth/login', authData)
+	}
+
+  loggedIn() {
+		return localStorage.getItem('token');
+	}
+
+
 
 //   constructor(private api: ApiService, private _router: Router) {
 //     this.jwtHelper = new JwtHelperService();

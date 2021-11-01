@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../User';
 import { Role } from '../Role';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '@vetclinic-app/api.service';
+import { ApiService } from '@vetclinic-app/core/services/api.service';
 
 @Component({
   selector: 'app-new-user',

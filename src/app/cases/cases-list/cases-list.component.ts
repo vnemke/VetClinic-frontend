@@ -40,7 +40,6 @@ export class CasesListComponent implements OnInit {
     this.petServices = this.route.snapshot.data.petServices;
 
     console.log(this.route.snapshot.data);
-    
   }
 
   onAddCase() {

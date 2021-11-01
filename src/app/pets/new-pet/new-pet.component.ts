@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '@vetclinic-app/api.service';
+import { ApiService } from '@vetclinic-app/core/services/api.service';
 import { Animal } from '../animal';
 import { Owner } from '../owner';
 import { Pet } from '../pet';

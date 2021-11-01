@@ -1,3 +1,23 @@
+<!-- <form [formGroup]="form">
+    <div class="container">
+      <label for="uname"><b>Username</b></label>
+      <input placeholder="Enter Username"  formControlName="username">
+        <br>
+      <label><b>Password</b></label>
+      <input placeholder="Enter Password" formControlName="password">
+        <br>
+    </div>
+    <button (click)="submit()">Login</button>
+</form> -->
+
+<form [formGroup]="form">
+    Username: <input type="text" formControlName="username"><br>
+    Pass: <input type="password" formControlName="password"><br>
+  
+    <button (click)="submit()">Login</button>
+</form>
+
+
 <!-- <div class="login-page-ct">
     <div class="login-page row no-gutters">
 

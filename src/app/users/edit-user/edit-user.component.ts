@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { ApiService } from '@vetclinic-app/api.service';
+import { ApiService } from '@vetclinic-app/core/services/api.service';
 import { Role } from '../Role';
 import { User } from '../User';
 import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';

@@ -5,7 +5,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { ApiService } from '../api.service';
+import { ApiService } from '../core/services/api.service';
 import { Case } from './case';
 
 @Injectable({

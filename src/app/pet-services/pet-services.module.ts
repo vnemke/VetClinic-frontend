@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SharedModule } from 'src/shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { EditPetServiceComponent } from './edit-pet-service/edit-pet-service.component';
 import { NewPetServiceComponent } from './new-pet-service/new-pet-service.component';
 import { PetServiceResolver } from './pet-service.resolver';

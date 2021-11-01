@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginPageComponent } from './auth/components/login-page/login-page.component';
+import { LoginComponent } from './auth/components/login/login.component';
 
 const routes: Routes = [
   {
@@ -16,12 +16,12 @@ const routes: Routes = [
   },
   {
     path: 'auth/login',
-    component: LoginPageComponent,
+    component: LoginComponent,
     data: { canAccess: ['*'] }
   },
   {
     path: '**',
-    redirectTo: 'app/application-form'
+    redirectTo: 'app/cases'
   }
 ];
 

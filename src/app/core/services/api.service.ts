@@ -4,9 +4,6 @@ import { Observable, throwError, } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
-
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +12,7 @@ export class ApiService {
   private baseUrl = environment;
   // private baseUrl = environment.apiUrl;
 
-  constructor(private _http: HttpClient, private _router: Router, private _snackBar: MatSnackBar) { }
+  constructor(private _http: HttpClient) { }
 
   getApiUrl(url) {
     return this.baseUrl + `/${url}`;
@@ -23,6 +20,22 @@ export class ApiService {
 
   getOne<T>(url: string): Observable<T> {
     return this._http.get<T>(this.getApiUrl(url))
+  }
+
+  get<T>(url: string): Observable<T> {
+    return this._http.get<T>(url)
+  }
+
+  post<T>(url: string, body: Object): Observable<T> {
+    return this._http.post<T>(url, body)
+  }
+
+  update<T>(url: string, body: T): Observable<T> {
+    return this._http.put<T>(url, body)
+  }
+
+  delete<T>(url: string): Observable<T> {
+    return this._http.delete<T>(url)
   }
 
   // get<T>(url: string, params?): Observable<T> {

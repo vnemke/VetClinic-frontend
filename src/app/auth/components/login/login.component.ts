@@ -13,20 +13,40 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private _auth: AuthService, private _router: Router) { }
 
-  form: FormGroup = new FormGroup({})
-  pendingResponse: boolean = false;
+  form: FormGroup = new FormGroup({});
+  loginError= false;
 
-  @Input() errorMessage!: string | null;
-  @Output() submitted = new EventEmitter<ILoginCredentials>();
-  @Input('pending')
-  set pending(isPending: boolean) {
-    this.pendingResponse = isPending;
-    if (isPending) {
-      this.form.disable();
-    } else {
-      this.form.enable();
-    }
+  ngOnInit(): void {
+    this.form = this.fb.group({
+      username: ['', [Validators.required]],
+      password: ['', [Validators.required]]
+    });    
   }
+
+  submit() {    
+    console.log(this.form.value);
+		this._auth.logIn(this.form.value.username, this.form.value.password)
+		.subscribe((res: any) => {
+			localStorage.setItem('token', res),
+      console.log(res);
+			this._router.navigate(['/app/cases'])},
+			err => {
+				this.loginError= true;
+			}
+		)
+	}
+
+  // @Input() errorMessage!: string | null;
+  // @Output() submitted = new EventEmitter<ILoginCredentials>();
+  // @Input('pending')
+  // set pending(isPending: boolean) {
+  //   this.pendingResponse = isPending;
+  //   if (isPending) {
+  //     this.form.disable();
+  //   } else {
+  //     this.form.enable();
+  //   }
+  // }
 
 
   // submit() {
@@ -38,13 +58,5 @@ export class LoginComponent implements OnInit {
 
   //   }
   // }
-
-
-  ngOnInit(): void {
-    this.form = this.fb.group({
-      email: ['', [Validators.required]],
-      password: ['', [Validators.required]]
-    });
-  }
 
 }
