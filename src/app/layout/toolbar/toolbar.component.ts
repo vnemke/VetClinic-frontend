@@ -15,11 +15,10 @@ export class ToolbarComponent implements OnInit {
     this._navigationService.toggleSidenav()
   }
 
-  toggleSidebarOpen(gfgfd) {
+  toggleSidebarOpen() {}
 
-  }
   logout() {
-    // this._authService.logout();
+    this._authService.logout();
   }
 
   ngOnInit(): void {

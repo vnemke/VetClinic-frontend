@@ -11,14 +11,14 @@
             
             <div class="button-field">
                 <div class="user-b-info">
-                    <span class="username">Full Name</span>
-                    <div class="user-role">Rola <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="user-status" role="img"
+                    <span class="username">{{_authService.fullName}}</span>
+                    <div class="user-role">{{_authService.role}} <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="circle" class="user-status" role="img"
                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                             <path fill="#0e85b3" d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8z">
                             </path>
                         </svg></div>
                 </div>
-                <div class="avatar-letter">F</div>    
+                <div class="avatar-letter">{{_authService.fullName[0]}}</div>    
             </div>
         </button>
     

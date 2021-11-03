@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { ILoginCredentials, IAuthResponse } from '../model';
-// import { ApiService } from '../../core/services/api.service';
-// import { JwtHelperService } from '@auth0/angular-jwt';
+// import { ILoginCredentials, IAuthResponse } from '../model';
+import { ApiService } from '@vetclinic-app/core/services/api.service';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Router } from '@angular/router';
 import { AuthData } from '../model/authData.model';
-import { ApiService } from '@vetclinic-app/core/services/api.service';
 // import { environment } from '@env/environment';
 
 @Injectable({
@@ -13,13 +12,32 @@ import { ApiService } from '@vetclinic-app/core/services/api.service';
 export class AuthService {
 
   isAuth: boolean;
-
+  token: string | null;
+  role: string;
+  fullName: string;
+  
   constructor(private api: ApiService, private _router: Router) {
+
+    this.token = localStorage.getItem('token') || '';
+
     if(localStorage.getItem('token')) {
-			this.isAuth = true;
+
+      var helper = new JwtHelperService();
+      var decodedToken = helper.decodeToken(this.token);
+      console.log(decodedToken);
+
+      this.role = decodedToken.role;  
+      this.fullName = decodedToken.fullName;    
+      console.log(this.role);
+      console.log(this.fullName);
+      
+      
 		} else {
-			this.isAuth = false;
+			// this.isAuth = false;
 		}
+
+   
+    
   }
 
   getToken() {
@@ -28,12 +46,17 @@ export class AuthService {
 
 	logIn(username: string, password: string) {
 		const authData: AuthData = {username: username, password: password}
-		return this.api.post('api/auth/login', authData)
+		return this.api.post('/api/auth/login', authData)
 	}
 
   loggedIn() {
 		return localStorage.getItem('token');
 	}
+
+  logout() {
+    localStorage.removeItem('token');
+    this._router.navigate(['/auth/login']);
+  }
 
 
 

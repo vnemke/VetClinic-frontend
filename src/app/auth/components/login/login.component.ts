@@ -24,13 +24,14 @@ export class LoginComponent implements OnInit {
   }
 
   submit() {    
-    console.log(this.form.value);
 		this._auth.logIn(this.form.value.username, this.form.value.password)
 		.subscribe((res: any) => {
 			localStorage.setItem('token', res),
       console.log(res);
 			this._router.navigate(['/app/cases'])},
 			err => {
+        console.log(err);
+        
 				this.loginError= true;
 			}
 		)
