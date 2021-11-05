@@ -26,8 +26,8 @@ export class LoginComponent implements OnInit {
   submit() {    
 		this._auth.logIn(this.form.value.username, this.form.value.password)
 		.subscribe((res: any) => {
-			localStorage.setItem('token', res),
-      console.log(res);
+			localStorage.setItem('token', res);
+      this._auth.decodedToken(res);
 			this._router.navigate(['/app/cases'])},
 			err => {
         console.log(err);

@@ -21,7 +21,9 @@ export class AuthenticationGuard implements CanActivate {
                     return true;
                }
                else {
-                    this.router.navigate([state.url]);
+                    this.router.navigate(['/app/pets']);
+                    console.log(state.url);
+                    
                     return false;
                }
 

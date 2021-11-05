@@ -8,18 +8,19 @@ import { NavCollapseComponent } from './navigation/nav-collapse/nav-collapse.com
 import { NavItemComponent } from './navigation/nav-item/nav-item.component';
 import { NavGroupComponent } from './navigation/nav-group/nav-group.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-
-// import { AuthenticationGuard } from '/src/app/auth/guards/authentication.guard';
+import { AuthenticationGuard } from '@vetclinic-app/auth/guards/authentication.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
-    //canActivate: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     children: [
         {
           path: 'users',
-          loadChildren: () => import('../users/users.module').then(m => m.UsersModule)
+          loadChildren: () => import('../users/users.module').then(m => m.UsersModule),
+          data: { canAccess: ['Admin'] },
+          canActivate: [AuthenticationGuard]
         },
         {
           path: 'pets',
@@ -50,7 +51,6 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  exports: [MainLayoutComponent],
-
+  exports: [MainLayoutComponent]
 })
 export class CoreAppModule { }
