@@ -1,1 +1,76 @@
-<p>new-user works!</p>
+<form [formGroup]="userForm" class="userForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <input class="input" type="text" pInputText placeholder="Username" formControlName="username" [style]="{'width':'250px'}">
+                        <div *ngIf="userForm.controls['username'].invalid && userForm.controls['username'].dirty">
+                            <small *ngIf="userForm.controls['username'].errors?.required" class="p-error">Username is required</small>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <input class="input" type="text" pInputText placeholder="Email" formControlName="email" [style]="{'width':'250px'}">
+                        <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].dirty">
+                            <small *ngIf="userForm.controls['email'].errors?.required" class="p-error">Email is required</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="col-12">
+                <div class="field-container">
+                    <div class="p-inputgroup">
+                        <p-password  [toggleMask]="true" [feedback]="false" placeholder="Password" 
+                        formControlName="password" [style]="{'min-width':'250px'}"></p-password>     
+                    </div>
+                </div>
+            </div> -->
+
+            <div class="col-12">
+                <div class="field-container">
+                    <div class="field">
+                        <p-dropdown [options]="roles" optionValue="id" formControlName="roleId" placeholder="Role" optionLabel="name" [style]="{'width':'250px'}" [showClear]="true" >
+                            <ng-template let-role>
+                                <div class="p-d-flex p-ai-center">
+                                    <div>{{role.name}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        <div *ngIf="userForm.controls['roleId'].invalid && userForm.controls['roleId'].dirty">
+                            <small *ngIf="userForm.controls['roleId'].errors?.required" class="p-error">Email is required</small>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+
+            <div class="col-12">
+                <div class="field-container">
+                    <input class="input" type="text" pInputText placeholder="First Name" formControlName="firstName" [style]="{'width':'250px'}">
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="field-container">
+                    <input class="input" type="text" pInputText placeholder="Last Name" formControlName="lastName" [style]="{'width':'250px'}">
+                </div>    
+            </div>
+
+            <div class="col-12">
+                <div class="buttons-field">
+                    <button pButton type="button" class="p-button-sm" (click)="onAddUser()" [disabled]="!userForm.valid">Add User</button>&nbsp;
+                    <button pButton type="button" class="p-button-sm p-button-secondary" (click)="onCancel()">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+    
+   

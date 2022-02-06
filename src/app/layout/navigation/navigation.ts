@@ -5,6 +5,7 @@ export const navigation: NavigationItem[] = [
         id: 'clinic',
         title: 'Vet Clinic',
         type: 'group',
+        canAccess: ['*'],
         icon: 'apps',
         children: [
             {
@@ -34,6 +35,7 @@ export const navigation: NavigationItem[] = [
         id: 'users',
         title: 'User managment',
         type: 'group',
+        canAccess: ['Admin'],
         icon: 'apps',
         children: [
             {

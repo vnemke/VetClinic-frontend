@@ -14,4 +14,5 @@ export interface Case {
     vetCases: any;
     petServiceId: number;
     casePetServices: any;
+    isPaid: boolean;
 }

@@ -16,9 +16,12 @@ import { PetsResolver } from '../pets/pets.resolver';
 import { UploaderComponent } from './uploader/uploader.component';
 import { UploadFileComponent } from './upload-file/upload-file.component';
 import { DndDirective } from './uploader/dnd.directive';
-import { FileSizePipe } from './upload-file/filesize.pipe';
 import { AnimalsResolver } from '../pets/animals.resolver';
 import { RacesResolver } from '../pets/races.resolver';
+import { StripeComponent } from './stripe/stripe.component';
+
+import { NgxStripeModule } from 'ngx-stripe';
+import { StripeResolver } from './stripe.resolver';
 
 const routes: Routes = [
   {
@@ -58,7 +61,8 @@ const routes: Routes = [
       controls: ControlsResolver,
       xrays: XraysResolver,
       vets: VetsResolver,
-      petServices: PetServicesResolver
+      petServices: PetServicesResolver,
+      payment: StripeResolver
     }
   },
   {
@@ -73,6 +77,10 @@ const routes: Routes = [
       vets: VetsResolver,
       petServices: PetServicesResolver
     }
+  },
+  {
+    path: 'payment/:id',
+    component: StripeComponent
   }
 ];
 
@@ -86,15 +94,14 @@ const routes: Routes = [
     UploaderComponent,
     UploadFileComponent,
     DndDirective,
-    FileSizePipe
+    StripeComponent
   ],
   imports: [
     RouterModule.forChild(routes),
-    SharedModule
+    SharedModule,
+    NgxStripeModule.forRoot('pk_test_51JujdBKmbZtXoc8QTRyYNgVl3EUg56vt8LR62bTpzm8BZTaxEJl8uCe43M7Lf7rZa5LU2ZELzVWOfw1NAzM0V2bR00PSiHtIWU'),
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [
-    FileSizePipe
-  ]
+  providers: []
 })
 export class CasesModule { }

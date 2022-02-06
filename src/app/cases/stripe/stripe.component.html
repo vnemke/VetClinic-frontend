@@ -1,0 +1,7 @@
+<div>
+    <ng-container *ngIf="elementsOptions?.clientSecret as clientSecret">
+        <ngx-stripe-payment [clientSecret]="clientSecret">
+        </ngx-stripe-payment>
+    </ng-container>
+    <button pButton type="button" id="button" class="p-button-sm p-button-success" label="Pay" (click)="pay()"></button>
+</div>

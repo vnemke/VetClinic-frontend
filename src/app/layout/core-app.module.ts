@@ -16,24 +16,24 @@ const routes: Routes = [
     component: MainLayoutComponent,
     canActivate: [AuthenticationGuard],
     children: [
-        {
-          path: 'users',
-          loadChildren: () => import('../users/users.module').then(m => m.UsersModule),
-          data: { canAccess: ['Admin'] },
-          canActivate: [AuthenticationGuard]
-        },
-        {
-          path: 'pets',
-          loadChildren: () => import('../pets/pets.module').then(m => m.PetsModule)
-        },
-        {
-          path: 'pet-services',
-          loadChildren: () => import('../pet-services/pet-services.module').then(m => m.PetServicesModule)
-        },
-        {
-          path: 'cases',
-          loadChildren: () => import('../cases/cases.module').then(m => m.CasesModule)
-        }
+      {
+        path: 'users',
+        loadChildren: () => import('../users/users.module').then(m => m.UsersModule),
+        data: { canAccess: ['Admin'] },
+        canActivate: [AuthenticationGuard]
+      },
+      {
+        path: 'pets',
+        loadChildren: () => import('../pets/pets.module').then(m => m.PetsModule)
+      },
+      {
+        path: 'pet-services',
+        loadChildren: () => import('../pet-services/pet-services.module').then(m => m.PetServicesModule)
+      },
+      {
+        path: 'cases',
+        loadChildren: () => import('../cases/cases.module').then(m => m.CasesModule)
+      }
     ]
   }
 ];

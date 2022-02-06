@@ -31,8 +31,8 @@ export class EditUserComponent implements OnInit {
     this.users = this.route.snapshot.data.users;
 
     this.userForm = this.fb.group({
-      username: {value: this.user.username, disabled: true},
-      email: {value: this.user.email, disabled: true },
+      username: { value: this.user.username, disabled: true },
+      email: { value: this.user.email, disabled: true },
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       roleId: this.user.roleId
@@ -42,30 +42,30 @@ export class EditUserComponent implements OnInit {
   onEditUser() {
     var roleValue = this.userForm.value.roleId;
     console.log('int', roleValue);
-    var index = this.roles.findIndex(r => r.id == roleValue);    
+    var index = this.roles.findIndex(r => r.id == roleValue);
     var role = this.roles[index];
-    console.log('role?',role);
-    
+    console.log('role?', role);
+
     this.user.roleId = role.id;
     this.user.role = role;
-    
-    var formValue = {...this.userForm.value, id: this.user.id, username: this.user.username, email: this.user.email, roleId: this.user.roleId}
-    var editUser = {...this.user, ...formValue}
-    
+
+    var formValue = { ...this.userForm.value, id: this.user.id, username: this.user.username, email: this.user.email, roleId: this.user.roleId }
+    var editUser = { ...this.user, ...formValue }
+
     // user values from form
     this.api.update("/api/users/" + this.user.id, formValue)
-      .subscribe(
-        () => {
-          this.editedUser.emit(editUser);
-          console.log('edit',editUser);
-          this._snackBar.open(this.user.username + ' is edited', 'OK', {
-            duration: 5000,
-            verticalPosition: this.verticalPosition
-          });
-        }
-      )
+    .subscribe(
+      () => {
+        this.editedUser.emit(editUser);
+        console.log('edit', editUser);
+        this._snackBar.open(this.user.username + ' is edited', 'OK', {
+          duration: 5000,
+          verticalPosition: this.verticalPosition
+        });
+      }
+    )
   }
-
+  
   deleteUserModal(modalUser: User) {
     const dailogDeleteUser = this.dialogService.open(ModalComponent, {
       data: { user: modalUser }, header: 'Do you want to delete ' + modalUser.username }

@@ -1,145 +1,218 @@
-<div class="details">
-    <div class="container">
-        <div class="row">
-            <div class="card-container">
-                <div class="col-12">
-                    <div class="header-field">
-                        <div class="header">Record-{{case.pet.id}}</div>
-                    </div>
-                </div>
-                
-                <div class="col-12">
-                    <div class="card">
-                        <label for="" class="header">Case</label>
-                        {{case.name}}
-                    </div>
-                    
-                </div>
-                <hr>
-                <div class="col-12">
-                    <div class="card">
-                        <label for="" class="header">Pet name</label>
-                        {{case.pet.name}}
-                    </div>
-                </div>
-                <hr>
-                <div class="col-12">
-                    <div class="card">
-                        <label for="" class="header">Owner</label>
-                        {{case.pet.owner.fullName}}
-                    </div>
-                </div>
-                <hr>
-                <div class="col-12 card">
-                    <label for="" class="header">Veterinarian</label>
-                    <div *ngFor="let vc of case.vetCases">
-                        {{vc.vet.fullName}}
-                    </div>
-                </div>
-                <hr>
-                <div class="col-12">
-                    <div class="card">
-                        <label for="" class="header">Date</label>
-                        {{case.date |  date: 'dd.MM.y.'}}
-                    </div>
-                </div>
-                <hr>
-               
-                <div class="col-12 card">
-                    <label for="" class="header">Service</label>
-                    <div *ngFor="let cs of case.casePetServices">
-                        {{cs.petService.name}}  
-                    </div>
-                </div>
-                <hr>
-                <div class="col-12">
-                    <div class="card">
-                    <label for="" class="header">Diagnosis</label>
-                    {{case.diagnosis}}               
-                    </div>
-                </div>
-                <hr>
-                <div class="col-12" *ngIf="case.therapies.length">
-                    <div class="header-field">
-                        <div class="header">Therapies</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12"  *ngFor="let t of case.therapies">
-                            <div class="card">
-                                <div class="card-field">
-                                    <label for="" class="card-header">Date</label>
-                                    {{t.date | date: 'dd.MM.y.'}}
-                                </div>    
-                                <div class="card-field">
-                                    <label for="" class="card-header">Description</label>
-                                    {{t.description}}
-                                </div>
-                                <div class="card-field">
-                                    <label for="" class="card-header">Drug</label>
-                                    {{t.drug}}
-                                </div>    
-                            </div>
-                        </div>
-                    </div>    
-                    <hr>
-                </div>
-            
-                <div class="col-12" *ngIf="case.controls.length">
-                    <div class="header-field">
-                        <div class="header">Controls</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-4 col-md-6 col-sm-12" *ngFor="let c of case.controls">
-                            <div class="card">
-                                <div class="card-field">
-                                    <label for="" class="card-header">Name</label>
-                                    {{c.name}}
-                                </div>
-                                <div class="card-field">
-                                    <label for="" class="card-header">Date</label>
-                                    {{c.date | date: 'dd.MM.y.'}}
-                                </div>
-                                <div class="card-field">  
-                                    <label for="" class="card-header">Description</label>
-                                    {{c.description}}
-                                </div>  
-                            </div>
-                        </div>
-                    </div>   
-                </div>
+<div class="container">
+    <div class="row">
 
-                <div class="col-12" *ngIf="case.xrays.length">
-                    <hr>  
-                    <div class="header-field">
-                        <div class="header">Documentation</div>
-                    </div>   
-                    <div class="file-field">
-                        <div class="row">
-                            <div class="col-lg-2 col-md-6 col-sm-12" *ngFor="let x of case.xrays">
-                                <a href="https://localhost:44369/MyImages/{{x.fileName}}" title="{{x.fileName}}">
-                                    <div class="name">
-                                    {{x.fileName}}
-                                    </div>
-                                </a>
-                            </div>    
+        <div class="col-12 header">
+            Record-{{case.pet.id}}
+        </div>
+
+        <div class="col-12" style="font-weight:bold">
+            Case
+        </div>
+
+        <div class="col-12">
+            {{case.name}}
+            <hr>
+        </div>
+
+        <div class="col-12" style="font-weight:bold">
+            Pet name
+        </div>
+
+        <div class="col-12">
+            {{case.pet.name}}
+            <hr>
+        </div>
+
+        <div class="col-12" style="font-weight:bold">
+            Owner
+        </div>
+
+        <div class="col-12">
+            {{case.pet.owner.fullName}}
+            <hr>
+        </div>
+
+        <div class="col-12" style="font-weight:bold">
+            Veterinarian
+        </div>
+
+        <div class="col-12">
+            <div *ngFor="let vc of case.vetCases">
+                {{vc.vet.fullName}}
+            </div>
+            <hr>
+        </div>
+
+
+        <div class="col-12" style="font-weight:bold">
+            Date
+        </div>
+
+        <div class="col-12">
+            {{case.date | date: 'dd.MM.y.'}}
+            <hr>
+        </div>
+
+
+        <div class="col-12" style="font-weight:bold">
+            Service
+        </div>
+
+        <div class="col-12">
+            <div *ngFor="let cs of case.casePetServices">
+                {{cs.petService.price}}
+            </div>
+            <hr>
+        </div>
+
+
+        <div class="col-12" style="font-weight:bold">
+            Diagnosis
+        </div>
+
+        <div class="col-12">
+            {{case.diagnosis}}
+            <hr>
+        </div>
+
+        <div class="col-12" *ngIf="case.therapies.length">
+
+            <div class="row">
+                <div class="col-12 header" >Therapies</div>
+
+                <div class="row">
+                    <div class="col-sm-4" style="padding-right:.5rem;" *ngFor="let t of case.therapies">
+
+                        <div class="col-12" style="font-weight:bold">
+                            Date
                         </div>
+
+                        <div class="col-12" style="padding-bottom:.4rem;">
+                            {{t.date | date: 'dd.MM.y.'}}
+                        </div>
+
+                        <div class="col-12" style="font-weight:bold">
+                            Drug
+                        </div>
+
+                        <div class="col-12" style="padding-bottom:.4rem;">
+                            {{t.drug}}
+                        </div>
+
+                        <div class="col-12" style="font-weight:bold">
+                            Description
+                        </div>
+
+                        <div class="col-12" style="padding-bottom:1.5rem;">
+                            {{t.description}}
+                            is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                            industry's standard dummy
+                        </div>
+
                     </div>
                 </div>
             </div>
-        </div> 
-  
-        <div class="pdfbutton-field">
-            <button pButton type="button" class="p-button-text p-button-plain" (click)="onPDF()">PDF Receipt</button>
-        </div>
-       
 
-        <div class="row">
-            <div class="col-12">
-                <div class="buttons-field">
-                    <button pButton type="button" class="p-button-sm" (click)="onEdit()">Edit Case</button>
-                    <button pButton type="button" class="p-button-sm p-button-secondary" (click)="onCancel()">Cancel</button>
+            <hr>
+        </div>
+
+        <div class="col-12" *ngIf="case.controls.length">
+
+            <div class="row">
+                <div class="col-12 header">Controls</div>
+
+                <div class="row">
+                    <div class="col-sm-4" *ngFor="let c of case.controls">
+
+                        <div class="col-12" style="font-weight:bold">
+                            Name
+                        </div>
+
+                        <div class="col-12" style="padding-bottom:.4rem;">
+                            {{c.name}}
+                        </div>
+
+                        <div class="col-12" style="font-weight:bold">
+                            Date
+                        </div>
+
+                        <div class="col-12" style="padding-bottom:.4rem;">
+                            {{c.date | date: 'dd.MM.y.'}}
+                        </div>
+
+                        <div class="col-12" style="font-weight:bold">
+                            Description
+                        </div>
+
+                        <div class="col-12" style="padding-bottom:1.5rem;">
+                            {{c.description}}
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <div class="col-12" *ngIf="case.xrays.length">
+
+            <div class="col-12 header">Documentation</div>
+            <div class="row">
+                <div class="col-lg-2 col-md-6 col-sm-12" *ngFor="let x of case.xrays">
+                    <a href="https://localhost:44369/MyImages/{{x.fileName}}" title="{{x.fileName}}">
+                        <div class="name">
+                            {{x.fileName}}
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <hr>
+        </div>
+
+        <div class="col-12" style="font-weight:bold">
+            Paid
+        </div>
+        <div class="col-12">
+            {{isPaid}}
+        </div>
+
+        <!-- <div *ngIf="isPaid==='Yes'"> -->
+        <button pButton type="button" class="p-button-text p-button-plain" (click)="onPDF()">PDF Receipt</button>
+
+        <!-- <div *ngIf="isPaid==='No'"> -->
+        <button pButton type="button" class="p-button-text p-button-plain" (click)="onShow()"
+            *ngIf="!toggle">PayBill</button>
+
+        <div class="payment" [class.toggle]="toggle">
+
+            <div class="container" *ngIf="isPaid==='No'">
+
+                <div class="row justify-content-center">
+                    <div class="col-lg-6 col-md-8 col-sm-12">
+                        <app-stripe [paymentCase]="payment"></app-stripe>
+                    </div>
+                </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-4 close">
+                        <button _ngcontent-ufx-c54="" pbutton="" pripple="" type="button" icon="pi pi-times"
+                            class="p-button-rounded p-button- p-button-text p-ripple p-button p-component p-button-icon-only"
+                            (click)="onShow()">
+                            <span class="p-button-icon pi pi-times" aria-hidden="true"></span><span aria-hidden="true"
+                                class="p-button-label">
+                                &nbsp;</span><span class="p-ink"
+                                style="height: 33px; width: 33px; top: 2.51562px; left: 3.59375px;"></span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="col-12" style="text-align:center">
+            <button pButton type="button" class="p-button-sm" (click)="onEdit()" style="margin-right:4px;">Edit Case</button>
+            <button pButton type="button" class="p-button-sm p-button-secondary" 
+            (click)="onCancel()" style="margin-left:4px;">Cancel</button>
+        </div>
+
     </div>
 </div>

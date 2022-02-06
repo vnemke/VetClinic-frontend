@@ -2,6 +2,11 @@
     display: none;
 }
 
+.header-field {
+    display: flex;
+    justify-content: space-between;
+}
+
 @media only screen and (max-width: 670px) {
     .show-btn {
         display: flex;

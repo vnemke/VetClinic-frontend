@@ -13,15 +13,13 @@ export class AuthenticationGuard implements CanActivate {
 
      canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-          //return of(true);
-
           const accessRoles: Array<string> = route.data['canAccess'];
           if (this.authService.isTokenValid() /*&& this.auth.appUser[claimType]*/) { //proveriti mozda u if-u
                if (this.authService.checkAccess(accessRoles)) {
                     return true;
                }
                else {
-                    this.router.navigate(['/app/pets']);
+                    // this.router.navigate(['/auth/login']);
                     console.log(state.url);
                     
                     return false;

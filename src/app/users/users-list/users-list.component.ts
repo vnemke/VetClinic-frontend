@@ -1,10 +1,11 @@
 
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Table } from 'primeng/table';
 import { User } from '../User';
 import { Role } from '../Role';
+import { AuthService } from '@vetclinic-app/auth/services/auth.service';
 
 
 @Component({
@@ -16,7 +17,6 @@ export class UsersListComponent implements OnInit {
 
   users: User[] = [];
   roles: Role[] = [];
-  url: string = "/api/users"
   showAll: boolean;
 
   @ViewChild('dt1') dt: Table;
@@ -24,11 +24,9 @@ export class UsersListComponent implements OnInit {
   applyFilterGlobal($event: any, stringVal: any) {
     this.dt!.filterGlobal(($event.target as HTMLInputElement).value, stringVal);
   }
-  // search logic ngprime 
 
-
-  constructor(private route: ActivatedRoute) { }
-
+  constructor(private route: ActivatedRoute, private _auth: AuthService, public router: Router) {}
+  
   ngOnInit(): void {
    this.users = this.route.snapshot.data.users;
    this.roles = this.route.snapshot.data.roles
@@ -57,5 +55,9 @@ export class UsersListComponent implements OnInit {
     } else {
       this.showAll = false;
     }
+  }
+
+  onAddUser() {
+    this.router.navigate(['/app/users/add'])
   }
 }

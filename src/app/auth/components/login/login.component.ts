@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatSnackBar, MatSnackBarVerticalPosition } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
-import { ILoginCredentials } from '@vetclinic-app/auth/model/loginCredentials.model';
 import { AuthService } from '@vetclinic-app/auth/services/auth.service';
 
 @Component({
@@ -11,10 +11,13 @@ import { AuthService } from '@vetclinic-app/auth/services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder, private _auth: AuthService, private _router: Router) { }
+  constructor(private fb: FormBuilder, private _auth: AuthService, private _router: Router,
+    private _snackBar: MatSnackBar) { }
 
   form: FormGroup = new FormGroup({});
   loginError= false;
+  value3: string;
+  verticalPosition: MatSnackBarVerticalPosition = 'bottom';
 
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -32,32 +35,12 @@ export class LoginComponent implements OnInit {
 			err => {
         console.log(err);
         
+        this._snackBar.open('invalid credentials', 'OK', {
+          duration: 5000,
+          verticalPosition: this.verticalPosition
+        });
 				this.loginError= true;
 			}
 		)
 	}
-
-  // @Input() errorMessage!: string | null;
-  // @Output() submitted = new EventEmitter<ILoginCredentials>();
-  // @Input('pending')
-  // set pending(isPending: boolean) {
-  //   this.pendingResponse = isPending;
-  //   if (isPending) {
-  //     this.form.disable();
-  //   } else {
-  //     this.form.enable();
-  //   }
-  // }
-
-
-  // submit() {
-  //   if (this.form.valid) {
-  //     this._auth.login(this.form.value).subscribe(resp => {
-  //       // this._auth.setAuthUser(resp.token);
-  //       this._router.navigate(['/app/dashboard']);
-  //     })
-
-  //   }
-  // }
-
 }

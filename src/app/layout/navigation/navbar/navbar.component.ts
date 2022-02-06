@@ -86,6 +86,20 @@ export class NavbarComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  isAuth(accessRoles: Array<string>): boolean {
+    if(accessRoles) {
+      if (accessRoles[0] == "*") {
+        return true;
+      } else if(accessRoles.indexOf(this._authService.role)>-1) {      
+        return true
+      } else {
+        return false
+      }
+    } else {
+      return false
+    }
+    
+  }
 
   ngOnInit(): void {
 

@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JwtHelperService } from '@auth0/angular-jwt';
+
+//modal
+import { ModalComponent } from '../modal/modal.component';
 
 //progressbar
 import { NgProgressModule } from 'ngx-progressbar';
 import { NgProgressHttpModule } from 'ngx-progressbar/http';
-
-import { JwtHelperService } from '@auth0/angular-jwt';
-
-import { ModalComponent } from '../modal/modal.component';
 
 //primeNG
 import { ButtonModule } from 'primeng/button';
@@ -22,6 +22,8 @@ import { DialogService, DynamicDialogModule } from 'primeng/dynamicdialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { PasswordModule } from 'primeng/password';
+
 
 //angualar materials
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
@@ -48,7 +50,8 @@ const sharedExports = [
     MatIconModule,
     MatMenuModule,
     NgProgressModule,
-    MatButtonModule
+    MatButtonModule,
+    PasswordModule
 ];
 
 @NgModule({

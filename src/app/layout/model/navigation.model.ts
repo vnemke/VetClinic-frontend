@@ -3,6 +3,7 @@ export interface NavigationItem
     id: string;
     title: string;
     type: 'item' | 'group' | 'collapsable';
+    canAccess?: Array<string>; 
     translate?: string;
     icon?: string;
     hidden?: boolean;

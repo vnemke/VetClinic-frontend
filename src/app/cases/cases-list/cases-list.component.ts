@@ -22,7 +22,7 @@ export class CasesListComponent implements OnInit {
   xrays: Xray[];
   vets: Vet[];
   petServices: PetService[];
-  showAll: boolean;
+  showAll: boolean = false;
   @ViewChild('dt1') dt: Table;
 
   applyFilterGlobal($event: any, stringVal: any) {
@@ -47,11 +47,7 @@ export class CasesListComponent implements OnInit {
   }
 
   onShowAll() {
-    if (!this.showAll) {
-      this.showAll = true;
-    } else {
-      this.showAll = false;
-    }
+   this.showAll = !this.showAll
   }
 
 }

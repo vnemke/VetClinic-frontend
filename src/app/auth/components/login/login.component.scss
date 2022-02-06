@@ -1,91 +1,17 @@
-.login-page-ct {
-    height: 100vh;
-    background: #f4f4f4;
-    .login-page {
-        height: 100%;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        position: relative;
-        .img-h {
-            max-width: 240px;
-            height: auto;
-            margin-bottom: 3rem;
-            position: relative;
-            left: 0;
-            display: block;
-            width: 180px;
-            position: absolute;
-            top: 2.25rem;
-            left: 2.25rem;
-        }
-        .login-form {
-            height: 100%;
-            padding: 7rem 2rem;
-            background-color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            form {
-                width: 100%;
-                max-width: 280px;
-                .sign-in {
-                    font-weight: 700;
-                    font-size: 2rem;
-                    padding-bottom: 1.5rem;
-                }
-                button {
-                    padding: .25rem 0;
-                    font-size: 1.05rem;
-                }
-                a {
-                    color: rgb(99, 102, 241);
-                    font-weight: 500;
-                    text-decoration: none;
-                    display: none;
-                }
-            }
-        }
-    }
-    .login-bg {
-        height: 100%;
-        background-color: rgb(38, 47, 61);
-        position: relative;
-        overflow: hidden;
-        // background-image: url(../../../../assets/images/left-link.svg);
-        background-repeat: repeat;
-        background-size: 62%;
-        display: flex;
-        align-items: center;
-        padding: 0 2rem;
-        background-position-x: -24%;
-        background-position-y: -24%;
-        .welcome-ct {
-            max-width: 42rem;
-            color: #fff;
-            z-index: 5;
-            position: relative;
-            line-height: 1.25;
-            color: rgb(241, 245, 249);
-            .welcome-title {
-                font-weight: 500;
-                font-size: 3.8rem;
-                padding-bottom: 0.85rem;
-            }
-            .welcome-sub {
-                color: rgb(148, 163, 184);
-                font-size: 1.2rem;
-            }
-        }
-    }
+.container {
+    display: flex;
+    justify-content: center;
+}
 
-    @media screen and (max-width: 767px) {
-        height: auto;
-        .login-form {
-            justify-content: center !important;
-            padding-top: 12rem !important;
-        }
-        .login-bg { 
-            display: none;
-        }
-    }
+.field-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: .75rem;
+}
+
+.buttons-field {
+    display: flex;
+    justify-content: center;
+    padding: .75rem;
 }

@@ -21,8 +21,16 @@ body {
 }
 
 .p-dialog .p-dialog-header .p-dialog-title {
-    font-weight: 600  !important;
-    font-size: 1rem  !important;
+    font-weight: 600;
+    font-size: 1rem !important;
+}
+
+.p-inputgroup {
+    width: 250px !important;
+}
+
+.p-button-label {
+    font-weight: 400 !important;
 }
 
 @media only screen and (max-width: 670px) {

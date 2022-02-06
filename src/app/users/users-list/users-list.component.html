@@ -4,15 +4,20 @@
         [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [globalFilterFields]="['username','email','firstName','lastName']" >
         <ng-template pTemplate="caption">
-            <div class="p-d-flex">
-                <span class="p-input-icon-left p-ml-auto">
-                    <i class="pi pi-search"></i>
-                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
-                </span>
-                <div class="show-btn">
-                    <div>Show all</div>
-                    <p-inputSwitch class="switch" (click)="onShowAll()"></p-inputSwitch>
+            <div class="header-field">
+                <div class="p-d-flex">
+                    <span class="p-input-icon-left p-ml-auto">
+                        <i class="pi pi-search"></i>
+                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
+                    </span>
                 </div>
+                <div class="button-field">
+                    <button pButton type="button" class="p-button-text p-button-secondary" (click)="onAddUser()">Add User</button>
+                    <div class="show-btn">
+                        <div>Show all</div>
+                        <p-inputSwitch class="switch" (click)="onShowAll()"></p-inputSwitch>
+                    </div>
+                </div>    
             </div>
         </ng-template>
         <ng-template pTemplate="header">
