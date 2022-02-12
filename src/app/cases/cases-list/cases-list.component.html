@@ -1,29 +1,40 @@
 <div class="container-fluid">
-    <p-table #dt1 [value]="cases" dataKey="name"
-        [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"  styleClass="p-datatable-customers "
-        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} cases"
+    <p-table #dt1 [value]="cases" dataKey="name" [rows]="10" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-customers " [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} cases"
         [globalFilterFields]="['name','pet.name','pet.race.animal.name']">
         <ng-template pTemplate="caption">
-            <div class="header-field">
-                <div class="p-d-flex">
-                    <span class="p-input-icon-left p-ml-auto">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
-                    </span>
+            <div class="d-flex flex-sm-row flex-column justify-content-between 
+            align-items-center">
+
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                        placeholder="Search keyword" />
+                </span>
+
+                <div>
+                    <button pButton type="button" class="p-button-text p-button-secondary" (click)="onAddCase()">Add
+                        Case</button>
                 </div>
-                <div class="button-field">
-                    <button pButton type="button" class="p-button-text p-button-secondary" (click)="onAddCase()">Add Case</button>
-                    <div class="show-btn">
-                        <div class="switch">Show all</div>
-                        <p-inputSwitch class="switch" (click)="onShowAll()"></p-inputSwitch>
-                    </div>
+
+            </div>
+
+
+            <div class="show-btn">
+                <div class="d-flex flex-column align-items-center">
+                    <div class="switch">Show all</div>
+                    <p-inputSwitch class="switch" (click)="onShowAll()"></p-inputSwitch>
                 </div>
             </div>
+
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="name" class="shown-columns-name">Name<p-sortIcon field="name" ></p-sortIcon></th>
-                <th pSortableColumn="date" class="shown-columns">Date<p-sortIcon field="date" ></p-sortIcon></th>
+                <th pSortableColumn="name" class="shown-columns-name">Name<p-sortIcon field="name"></p-sortIcon>
+                </th>
+                <th pSortableColumn="date" class="shown-columns">Date<p-sortIcon field="date"></p-sortIcon>
+                </th>
                 <th class="show-columns">Pet</th>
                 <th class="hide-columns" [class.show]="showAll">Animal</th>
                 <th class="hide-columns" [class.show]="showAll">Vet</th>
@@ -31,13 +42,13 @@
         </ng-template>
         <ng-template pTemplate="body" let-case let-expanded="expanded">
             <tr>
-                <td class="shown-columns" >
-                    <a [routerLink] = "['/app/cases', case.id]">
+                <td class="shown-columns">
+                    <a [routerLink]="['/app/cases', case.id]">
                         {{case.name}}
                     </a>
                 </td>
-                <td class="show-columns" >{{case.date | date:'dd/MM/y'}}</td>
-                <td class="show-columns" >{{case.pet.name}}</td>
+                <td class="show-columns">{{case.date | date:'dd/MM/y'}}</td>
+                <td class="show-columns">{{case.pet.name}}</td>
                 <td class="hide-columns" [class.show]="showAll">{{case.pet.race.animal.name}}</td>
                 <td class="hide-columns" [class.show]="showAll">
                     <div class="vets" *ngFor="let vc of case.vetCases">

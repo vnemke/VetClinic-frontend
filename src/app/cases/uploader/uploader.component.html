@@ -2,14 +2,10 @@
     <p>Drag nad drop file here</p>
 </div>
 
-<div class="label-field">
-    <label for="choose-files" pButton type="button" class="p-button-sm" icon="pi pi-upload" iconPos="left" label="Browse"></label>
+<label for="choose-files" pButton type="button" class="p-button-sm" icon="pi pi-upload" iconPos="left"
+    label="Browse"></label>
+<input type="file" id="choose-files" (change)="onFileSelected($event)" multiple />
+
+<div *ngFor="let file of files">
+    <app-upload-file [droppedFile]="file" (deleteFile)="onDeletedFile($event)" class="single-file"></app-upload-file>
 </div>
-<input type="file" id="choose-files" (change)="onFileSelected($event)" multiple/>
-<div class="files-list" >
-    <div *ngFor="let file of files">
-        <app-upload-file [droppedFile]="file" (deleteFile)="onDeletedFile($event)" class="single-file"></app-upload-file>
-    </div>
-</div>  
-
-

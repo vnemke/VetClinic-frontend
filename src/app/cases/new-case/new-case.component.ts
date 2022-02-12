@@ -13,6 +13,7 @@ import { Vet } from '../vet';
 import { Xray } from '../xray';
 import { Animal } from '@vetclinic-app/pets/animal'
 import { Race } from '@vetclinic-app/pets/race';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-new-case',
@@ -32,12 +33,15 @@ export class NewCaseComponent implements OnInit {
   xrays: Xray[];
   vets: Vet[];
   petServices: PetService[];
+  filteredAnimals: Animal[] = [];
   filteredRaces: Race[] = [];
   filteredPets: Pet[] = [];
   selectedAnimal: boolean;
   selectedRace: boolean;
-  selectedPet: boolean;
+  // selectedPet: boolean;
   selectedPetId: any;
+  // selectedPetValue: any;
+  petId: boolean = false;
 
   @ViewChild('fileUploader') fileUploader: any;
 
@@ -47,6 +51,7 @@ export class NewCaseComponent implements OnInit {
     public router: Router, public dialogService: DialogService, private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
+  
     this.case = this.route.snapshot.data.case;
     this.pets = this.route.snapshot.data.pets;
     this.animals = this.route.snapshot.data.animals;
@@ -62,73 +67,62 @@ export class NewCaseComponent implements OnInit {
     this.caseForm = this.fb.group({
       name: ['', Validators.required],
       animalId: [null, Validators.required],
-      raceId: [null,  Validators.required],
-      petId: [null, Validators.required],
+      raceId: [{value: null, disabled: !this.selectedAnimal}, Validators.required],
+      petId: [{value: null, disabled: !this.selectedRace}, Validators.required],
       diagnosis: [''],
       date: ['', Validators.required],
       vetCases: ['', Validators.required],
       casePetServices: ['', Validators.required],
-      therapies: this.fb.array([]),
-      controls: this.fb.array([])
-    }); 
-
+      controls: this.fb.array([]),
+      therapies: this.fb.array([])
+    });
+    
     //filter races and pets
     this.caseForm.get('animalId')?.valueChanges
     .subscribe(animalId => {
+      console.log('value', animalId);
       if (animalId == null) {
-        console.log('nula vrednost', animalId);
-        this.filteredRaces = [];
         this.selectedAnimal = false;
-      } else {
+        this.caseForm.controls['raceId'].disable();
+      } else {   
         var result = this.races.filter(r => r.animalId == animalId);
-        console.log(result);
+        console.log(result); 
         this.filteredRaces = result;
         this.selectedAnimal = true;
+        this.caseForm.controls['raceId'].enable();
+        this.caseForm.controls['raceId'].reset();
       }
-    })      
+    })   
     
     this.caseForm.get('raceId')?.valueChanges
     .subscribe(raceId => {
+      console.log('race val', raceId);
       if (raceId == null) {
-        console.log('nula vrednost', raceId);
         this.filteredPets = [];
-        this.selectedRace = false;
+        this.caseForm.controls['petId'].disable();
       } else {
         var result = this.pets.filter(p => p.raceId == raceId);
         console.log('filpets',result);
         this.filteredPets = result;
-        this.selectedRace = true;
-        this.selectedPetId = null;
+        this.petId = false;
+        console.log('petIdprop', this.petId);
+        this.caseForm.controls['petId'].enable();
       }
-    })
-
+    });       
+    
     this.caseForm.get('petId')?.valueChanges
     .subscribe((petId) => {
       if (petId == null) {
-        this.selectedPet = false;
+        console.log('petval', petId);
+        this.selectedPetId = null;
+        this.petId = false;
+        console.log('petIdprop', this.petId);
+        
       } else {
-        this.selectedPet = true;
         this.selectedPetId = petId;
+        this.petId = true;        
       }
     })
-  }
-
-  //therapies form array
-  get therapiesForm() {
-    return this.caseForm.controls["therapies"] as FormArray;
-  }
-
-  addTherapiesForm() {
-    const therapyFormGroup = this.fb.group({
-      drug: ['', Validators.required],
-      description: ['', Validators.required],
-      date: ['', Validators.required],
-    });
-    this.therapiesForm.push(therapyFormGroup);
-  }
-
-  deleteTherapy(therapyIndex: number) {
-    this.therapiesForm.removeAt(therapyIndex);
   }
 
   //controls form array 
@@ -147,6 +141,24 @@ export class NewCaseComponent implements OnInit {
 
   deleteControl(controlIndex: number) {
     this.controlsForm.removeAt(controlIndex);
+  }
+
+  //therapies form array
+  get therapiesForm() {
+    return this.caseForm.controls["therapies"] as FormArray;
+  }
+
+  addTherapiesForm() {
+    const therapyFormGroup = this.fb.group({
+      drug: ['', Validators.required],
+      description: ['', Validators.required],
+      date: ['', Validators.required],
+    });
+    this.therapiesForm.push(therapyFormGroup);
+  }
+
+  deleteTherapy(therapyIndex: number) {
+    this.therapiesForm.removeAt(therapyIndex);
   }
 
   onAddCase() {

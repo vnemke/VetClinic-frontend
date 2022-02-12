@@ -1,62 +1,57 @@
-.container {
-    display: flex;
-    justify-content: center;
-} 
-
-.caseForm { 
-    max-width: 300px;
-    margin-top: 1.5rem;
+.formcont {
+    margin: 0 auto;
+    max-width: 450px;
 }
 
-.field-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: .75rem;
+.header {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px
 }
 
-.buttons-field {
-    display: flex;
-    justify-content: center;
-    padding: .75rem;
+.msg {
+    color: #3d8aca;
 }
 
-.icon-field {
-    display: flex;
-    justify-content: center;
+.margin-b-5 {
+    margin-bottom: 5px;
 }
 
-.field {
-    display: flex;
-    flex-direction: column;
+.margin-b-10 {
+    margin-bottom: 10px;
 }
 
-.field-form {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    padding: .75rem 0 0 0 ;
+.margin-r-10 {
+    margin-right: 10px;
 }
 
-.formArr {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.align {
+    text-align: center;
 }
 
-.field-formArr {
-    margin-bottom: .75rem;
+.p-inputtext {
+    width: 100% !important;
+}
+
+p-dropdown ::ng-deep .p-component {
+   width: 100% !important;
+}
+
+
+::ng-deep .p-calendar {
+    width: 100% !important;
+}
+
+::ng-deep .p-multiselect {
+    width: 100% !important;
 }
 
 .pi {
     cursor: pointer;
 }
 
-.p-button-sm {
-    margin: 0.3rem
-}
-
-.msg {
-    color: #3d8aca;
+@media only screen and (max-width: 670px) { 
+    .formcont {
+        padding-left: .5rem;
+    }
 }
