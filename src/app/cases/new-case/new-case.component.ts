@@ -38,10 +38,8 @@ export class NewCaseComponent implements OnInit {
   filteredPets: Pet[] = [];
   selectedAnimal: boolean;
   selectedRace: boolean;
-  // selectedPet: boolean;
   selectedPetId: any;
-  // selectedPetValue: any;
-  petId: boolean = false;
+  date1: string;
 
   @ViewChild('fileUploader') fileUploader: any;
 
@@ -49,6 +47,8 @@ export class NewCaseComponent implements OnInit {
   
   constructor(private fb: FormBuilder, private api: ApiService, private route: ActivatedRoute, 
     public router: Router, public dialogService: DialogService, private _snackBar: MatSnackBar) { }
+
+    
 
   ngOnInit(): void {
   
@@ -76,6 +76,12 @@ export class NewCaseComponent implements OnInit {
       controls: this.fb.array([]),
       therapies: this.fb.array([])
     });
+
+    //default date(current date)
+    var today = new Date();
+    this.date1 = today.getDate()+'/'+ today.getMonth()+'/'+today.getFullYear();
+    this.caseForm.controls.date.setValue(this.date1);
+    console.log(this.date1);
     
     //filter races and pets
     this.caseForm.get('animalId')?.valueChanges
@@ -104,9 +110,8 @@ export class NewCaseComponent implements OnInit {
         var result = this.pets.filter(p => p.raceId == raceId);
         console.log('filpets',result);
         this.filteredPets = result;
-        this.petId = false;
-        console.log('petIdprop', this.petId);
         this.caseForm.controls['petId'].enable();
+        this.caseForm.controls['petId'].reset();       
       }
     });       
     
@@ -114,13 +119,9 @@ export class NewCaseComponent implements OnInit {
     .subscribe((petId) => {
       if (petId == null) {
         console.log('petval', petId);
-        this.selectedPetId = null;
-        this.petId = false;
-        console.log('petIdprop', this.petId);
-        
+        this.selectedPetId = null; 
       } else {
         this.selectedPetId = petId;
-        this.petId = true;        
       }
     })
   }

@@ -44,15 +44,14 @@
 
             <div class="margin-b-10">
                 <p-dropdown [options]="filteredPets" formControlName="petId" optionValue="id" placeholder="Pet"
-                    optionLabel="name" [showClear]="true">
+                    optionLabel="name" [showClear]="filteredPets.length">
                     <ng-template let-pet>
                         <div class="p-d-flex p-ai-center">
                             <div>{{pet.name}}</div>
                         </div>
                     </ng-template>
                 </p-dropdown>
-                <small class="msg" *ngIf="petId">record-{{selectedPetId}}</small>
-                <!-- *ngIf="selectedPet" -->
+                <small class="msg" *ngIf="selectedPetId">record-{{selectedPetId}}</small>
                 <div *ngIf="caseForm.controls['petId'].invalid && caseForm.controls['petId'].dirty">
                     <small *ngIf="caseForm.controls['petId'].errors?.required" class="p-error">Pet is
                         required</small>
@@ -61,7 +60,7 @@
             </div>
 
             <div class="margin-b-10">
-                <p-calendar dateFormat="dd/mm/yy" formControlName="date" [showIcon]="true">
+                <p-calendar dateFormat="dd/mm/yy" formControlName="date" [showIcon]="true" >
                 </p-calendar>
                 <div *ngIf="caseForm.controls['date'].invalid && caseForm.controls['date'].dirty">
                     <small *ngIf="caseForm.controls['date'].errors?.required" class="p-error">Date is required</small>

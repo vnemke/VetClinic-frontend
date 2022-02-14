@@ -60,13 +60,6 @@ export class CaseDetailsComponent implements OnInit {
     this.router.navigate(['/app/cases/edit', this.case.id]);
   }
 
-  // onPay() {
-  //   console.log('payment toggle');
-  //   this.toggle = !this.toggle;
-  // }
-
-
-
   onCancel() {
     this.router.navigate(['/app/cases']);
   }
