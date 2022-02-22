@@ -39,19 +39,18 @@ export class EditPetComponent implements OnInit {
     console.log(this.pet);
 
     this.petForm = this.fb.group({
-      name: [this.pet.name,  Validators.required],
-      sex: [this.pet.sex,  Validators.required],
-      year: [formatDate(this.pet.year,'MM/yyyy','en'), Validators.required],
-      animalId: [this.pet.race.animalId, Validators.required],
+      name: [this.pet.name, Validators.required],
+      sex: [this.pet.sex, Validators.required],
+      year: [formatDate(this.pet.year, 'dd/MM/y', 'en'), Validators.required],
+      animalId: [{value:this.pet.race.animalId, disabled:!this.selectedAnimal},Validators.required],
       raceId: [this.pet.raceId, Validators.required],
       ownerId: [this.pet.ownerId, Validators.required]
     })
 
     this.filteredRaces = this.races.filter(r => r.animalId == this.pet.race.animalId);
     console.log(this.filteredRaces);
-  
+
     console.log('forma', this.petForm.value);
-    
 
     this.petForm.get('animalId')?.valueChanges
     .subscribe(animalId => {
@@ -59,45 +58,47 @@ export class EditPetComponent implements OnInit {
         console.log('nula vrednost', animalId);
         this.filteredRaces = [];
         this.selectedAnimal = false;
+        this.petForm.controls['raceId'].disable();
       } else {
         var result = this.races.filter(r => r.animalId == animalId);
         console.log(result);
         this.filteredRaces = result;
         this.selectedAnimal = true;
+        this.petForm.controls['raceId'].enable()
       }
-    })      
+    })
   }
 
   onEditPet() {
     var body = { ...this.petForm.value, id: this.pet.id }
-  
+
     this.api.update("/api/pets/" + this.pet.id, body)
-      .subscribe(
-        () => {
-        this.router.navigate(['/app/pets']) 
-          this._snackBar.open(this.pet.name + ' is edited', 'OK', {
-            duration: 5000,
-            verticalPosition: this.verticalPosition
-          });
-        }
-      )
+    .subscribe(
+      () => {
+        this.router.navigate(['/app/pets'])
+        this._snackBar.open(this.pet.name + ' is edited', 'OK', {
+          duration: 5000,
+          verticalPosition: this.verticalPosition
+        });
+      }
+    )
   }
 
   onDeletePetModal(modalPet: Pet) {
     const dailogDeletePet = this.dialogService.open(ModalComponent, {
-      data: { user: modalPet }, header: 'Do you want to delete ' + modalPet.name }
-    );
+      data: { user: modalPet }, header: 'Do you want to delete ' + modalPet.name
+    });
     dailogDeletePet.onClose.subscribe(res => {
       console.log(res);
       if (res) {
         this.api.delete("/api/pets/" + this.pet.id)
-        .subscribe(() => {
-          this.router.navigate(['/app/pets'])
-          this._snackBar.open(modalPet.name + ' is deleted', 'End now', {
-            duration: 5000,
-            verticalPosition: this.verticalPosition
-          });
-        })
+          .subscribe(() => {
+            this.router.navigate(['/app/pets'])
+            this._snackBar.open(modalPet.name + ' is deleted', 'Ok', {
+              duration: 5000,
+              verticalPosition: this.verticalPosition
+            });
+          })
       }
     });
   }

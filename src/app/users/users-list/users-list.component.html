@@ -1,29 +1,39 @@
 <div class="container-fluid">
-    <p-table #dt1 [value]="users" dataKey="username"
-        [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"  styleClass="p-datatable-customers"
-        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
-        [globalFilterFields]="['username','email','firstName','lastName']" >
+    <p-table #dt1 [value]="users" dataKey="username" [rows]="10" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-customers" [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+        [globalFilterFields]="['username','email','firstName','lastName']">
         <ng-template pTemplate="caption">
-            <div class="header-field">
-                <div class="p-d-flex">
-                    <span class="p-input-icon-left p-ml-auto">
-                        <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
-                    </span>
-                </div>
-                <div class="button-field">
-                    <button pButton type="button" class="p-button-text p-button-secondary" (click)="onAddUser()">Add User</button>
-                    <div class="show-btn">
+
+            <div class="d-flex flex-sm-row flex-column justify-content-between 
+                align-items-center">
+
+                <span class="p-input-icon-left p-ml-auto">
+                    <i class="pi pi-search"></i>
+                    <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                        placeholder="Search keyword" />
+                </span>
+
+                <button pButton type="button" class="p-button-text p-button-secondary" (click)="onAddUser()">Add
+                    User</button>
+
+                <div class="show-btn">
+                    <div class="d-flex flex-column align-items-center">
                         <div>Show all</div>
                         <p-inputSwitch class="switch" (click)="onShowAll()"></p-inputSwitch>
                     </div>
-                </div>    
+                </div>
+
             </div>
+
+
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th style="width: 3rem"></th>
-                <th class="show-columns" pSortableColumn="username" >Username<p-sortIcon #dt2 field="username"></p-sortIcon></th>
+                <th class="show-columns" pSortableColumn="username">Username<p-sortIcon #dt2 field="username">
+                    </p-sortIcon>
+                </th>
                 <th class="show-columns">Email</th>
                 <th class="hide-columns" [class.show]="showAll">Role</th>
                 <th class="hide-columns" [class.show]="showAll">First Name</th>
@@ -33,8 +43,9 @@
         <ng-template pTemplate="body" let-user let-expanded="expanded">
             <tr>
                 <td>
-                    <button type="button" pButton pRipple [pRowToggler]="user" class="p-button-text p-button-rounded p-button-plain" 
-                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" *ngIf="!showAll"></button>
+                    <button type="button" pButton pRipple [pRowToggler]="user"
+                        class="p-button-text p-button-rounded p-button-plain"
+                        [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'" *ngIf="!showAll"></button>
                 </td>
                 <td class="show-columns">{{user.username}}</td>
                 <td class="show-columns">{{user.email}}</td>
@@ -44,7 +55,12 @@
             </tr>
         </ng-template>
         <ng-template pTemplate="rowexpansion" let-user>
-        <tr><td colspan="6" *ngIf="!showAll"><app-edit-user [user]="user" (editedUser)="onEditedUser($event)" (deletedUser)="onDeletedUser($event)"></app-edit-user></td></tr>
+            <tr>
+                <td colspan="6" *ngIf="!showAll">
+                    <app-edit-user [user]="user" (editedUser)="onEditedUser($event)"
+                        (deletedUser)="onDeletedUser($event)"></app-edit-user>
+                </td>
+            </tr>
         </ng-template>
     </p-table>
 </div>

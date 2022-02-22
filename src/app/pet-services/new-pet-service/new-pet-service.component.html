@@ -1,35 +1,38 @@
+<div class="container g-0">
+    <div class="formcont">
 
-<form [formGroup]="petServiceForm" class="petServiceForm">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="field">
-                    <input class="p-invalid" type="text" pInputText placeholder="Name" formControlName="name" [style]="{'width':'250px'}">           
-                    <div *ngIf="petServiceForm.controls['name'].invalid && petServiceForm.controls['name'].dirty">
-                        <small *ngIf="petServiceForm.controls['name'].errors?.required" class="p-error">Name is required</small>
-                    </div> 
+        <form [formGroup]="petServiceForm">
+
+            <div class="margin-b-10">
+                <input class="p-invalid" type="text" pInputText placeholder="Name" formControlName="name">
+                <div *ngIf="petServiceForm.controls['name'].invalid && petServiceForm.controls['name'].dirty">
+                    <small *ngIf="petServiceForm.controls['name'].errors?.required" class="p-error">Name is required</small>
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="field">
-                    <input class="p-invalid" type="text" pInputText placeholder="Price" formControlName="price" [style]="{'width':'250px'}">           
-                    <div *ngIf="petServiceForm.controls['price'].invalid && petServiceForm.controls['price'].dirty">
-                        <small *ngIf="petServiceForm.controls['price'].errors?.required" class="p-error">Price is required</small>
-                    </div> 
+            
+            <div class="margin-b-10">
+                <input class="p-invalid" type="text" pInputText placeholder="Price" formControlName="price">
+                <div *ngIf="petServiceForm.controls['price'].invalid && petServiceForm.controls['price'].dirty">
+                    <small *ngIf="petServiceForm.controls['price'].errors?.required" class="p-error">Price is required</small>
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="field">
-                    <input class="p-invalid" type="text" pInputText placeholder="Description" formControlName="description" [style]="{'width':'250px'}">           
+          
+            <div class="margin-b-10">
+                <input class="p-invalid" type="text" pInputText placeholder="Description" formControlName="description">
+            </div>
+            
+            <div class="row g-0 justify-content-center margin-t-10 magin-b-10">
+                <div class="col-auto">
+                    <button pButton type="button" class="p-button-sm margin-r-10" (click)="onAddService()" [disabled]="!petServiceForm.valid">
+                    Add 
+                    </button>
+                    <button pButton type="button" class="p-button-sm p-button-secondary" (click)="onCancel()">Cancel</button>
                 </div>
             </div>
+          
+        </form>
 
-            <div class="col-12">
-                <button pButton type="button" class="p-button-sm" (click)="onAddService()" [disabled]="!petServiceForm.valid">Add Pet</button>
-                <button pButton type="button" class="p-button-sm p-button-secondary" (click)="onCancel()">Cancel</button>
-            </div>
-        </div>
-    </div>    
-</form>    
+    </div> 
+</div>      

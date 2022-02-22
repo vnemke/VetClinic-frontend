@@ -1,29 +1,41 @@
 <div class="container-fluid">
-    <p-table #dt1 [value]="pets" dataKey="name" 
-        [rows]="10" [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]"  styleClass="p-datatable-customers "
-        [paginator]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+    <p-table #dt1 [value]="pets" dataKey="name" [rows]="10" [showCurrentPageReport]="true"
+        [rowsPerPageOptions]="[10,25,50]" styleClass="p-datatable-customers " [paginator]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
         [globalFilterFields]="['name','sex','year', 'race.name']">
         <ng-template pTemplate="caption">
-            <div class="header-field">
+
+            <div class="d-flex flex-sm-row flex-column justify-content-between 
+            align-items-center">
+
                 <div class="p-d-flex">
                     <span class="p-input-icon-left p-ml-auto">
                         <i class="pi pi-search"></i>
-                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')" placeholder="Search keyword" />
+                        <input pInputText type="text" (input)="applyFilterGlobal($event, 'contains')"
+                            placeholder="Search keyword" />
                     </span>
                 </div>
-                <div class="button-field">
-                    <button pButton type="button" class="p-button-text p-button-secondary" id="add-pet-btn" (click)="onAddPet()">Add Pet</button>
-                    <div class="show-btn">
-                        <div class="switch">Show all</div>
+                
+                <button pButton type="button" class="p-button-text p-button-secondary" id="add-pet-btn"
+                    (click)="onAddPet()">Add Pet</button>
+
+                <div class="show-btn">
+
+                    <div class="d-flex flex-column align-items-center">
+                        <div>Show all</div>
                         <p-inputSwitch class="switch" (click)="onShowAll()"></p-inputSwitch>
                     </div>
+
                 </div>
+
             </div>
+
         </ng-template>
         <ng-template pTemplate="header">
             <tr>
                 <th class="shown-columns">Record</th>
-                <th pSortableColumn="name" class="shown-columns">Name<p-sortIcon field="name" ></p-sortIcon></th>
+                <th pSortableColumn="name" class="shown-columns">Name<p-sortIcon field="name"></p-sortIcon>
+                </th>
                 <th class="shown-columns">Animal</th>
                 <th class="shown-columns-race"> Race</th>
                 <th class="hide-columns" [class.show]="showAll">Year</th>
@@ -35,7 +47,7 @@
             <tr>
                 <td class="shown-columns">{{pet.id}}</td>
                 <td class="shown-columns">
-                    <a [routerLink] = "['/app/pets', pet.id]">
+                    <a [routerLink]="['/app/pets', pet.id]">
                         {{pet.name}}
                     </a>
                 </td>

@@ -146,7 +146,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-2 align">
+                                    <div class="col-2 align-cnt">
                                         <i class="pi pi-trash" style="font-size: 1.1rem; color: red;"
                                             (click)="deleteControl(i)"></i>
                                     </div>
@@ -158,7 +158,7 @@
 
                     </div>
 
-                    <div class="col-12 align magin-b-10">
+                    <div class="col-12 align-cnt magin-b-10">
                         <button pButton type="button" class="p-button-sm p-button-text p-button-primary"
                             (click)="addConstrolsForm()">Add Control</button>
 
@@ -210,7 +210,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-2 align">
+                                    <div class="col-2 align-cnt">
                                         <i class="pi pi-trash" style="font-size: 1.1rem; color: red;"
                                             (click)="deleteTherapy(i)"></i>
                                     </div>
@@ -224,7 +224,7 @@
                     </div>
                 </div>
 
-                <div class="col-12 align margin-b-10">
+                <div class="col-12 align-cnt margin-b-10">
                     <button pButton type="button" class="p-button-sm p-button-text p-button-primary"
                         (click)="addTherapiesForm()">Add Therapy</button>
                 </div>
@@ -234,11 +234,11 @@
             <!-- drag & drop upload -->
             <app-uploader #fileUploader></app-uploader>
 
-            <div class="row g-0 justify-content-center magin-b-10">
+            <div class="row g-0 justify-content-center margin-t-10 magin-b-10">
                 <div class="col-auto">
                     <button pButton type="button" class="p-button-sm margin-r-10" (click)="onAddCase()"
                         [disabled]="!caseForm.valid">Add
-                        Case</button>
+                    </button>
 
                     <button pButton type="button" class="p-button-sm p-button-secondary"
                         (click)="onCancel()">Cancel</button>

@@ -16,7 +16,6 @@ export class NewUserComponent implements OnInit {
   users: User[] = [];
   roles: Role[] = [];
   userForm: FormGroup;
-  // value3: string;
   verticalPosition: MatSnackBarVerticalPosition = 'bottom';
   
   constructor(private fb: FormBuilder, private api: ApiService, public route: ActivatedRoute,

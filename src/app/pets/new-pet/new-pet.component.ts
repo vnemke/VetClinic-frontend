@@ -23,6 +23,7 @@ export class NewPetComponent implements OnInit {
   selectedAnimal: boolean;
   newOwner: boolean;
   selectedValue: string='female';
+  isSubmitted: boolean = false;
 
   petForm: FormGroup;
   ownerForm: FormGroup;
@@ -40,12 +41,12 @@ export class NewPetComponent implements OnInit {
     console.log(this.route.snapshot);    
 
     this.petForm = this.fb.group({
-      name: ['', Validators.required],
-      sex: ['',  Validators.required],
-      year: ['',  Validators.required],
-      animalId: [null, Validators.required],
-      raceId: [null,  Validators.required],
-      ownerId: [null, Validators.required]
+      name: ['',Validators.required],
+      sex: ['', Validators.required],
+      year: ['', Validators.required],
+      animalId: [null,Validators.required],
+      raceId: [{value:null, disabled:!this.selectedAnimal},Validators.required],
+      ownerId: [null,Validators.required]
     });
 
     this.petForm.get('animalId')?.valueChanges
@@ -54,26 +55,29 @@ export class NewPetComponent implements OnInit {
         console.log('nula vrednost', animalId);
         this.filteredRaces = [];
         this.selectedAnimal = false;
+        this.petForm.controls['raceId'].disable();
       } else {
         var result = this.races.filter(r => r.animalId == animalId);
         console.log(result);
         this.filteredRaces = result;
         this.selectedAnimal = true;
+        this.petForm.controls['raceId'].enable();
       }
-    })      
-
+    })
+  
     this.ownerForm = this.fb.group({
-      firstName: [''],
-      lastName: [''],
-      idCard: [''],
+      firstName: ['',Validators.required],
+      lastName: ['',Validators.required],
+      idCard: ['', Validators.required],
       address: [''],
-      email: [''],
-      phone: ['']
+      email: ['',Validators.required],
+      phone: ['',Validators.required]
     })
   }
 
   onNewOwner() {
     this.newOwner = true;
+    this.petForm.controls['ownerId'].reset();
     this.petForm.controls['ownerId'].disable();
   }  
 
@@ -83,15 +87,22 @@ export class NewPetComponent implements OnInit {
   }
 
   onAddPet() {
+    this.isSubmitted = true;
     var body = { pet: this.petForm.value, owner: this.ownerForm.value }
     console.log('forma',body);
-
     if(this.newOwner) {
       this.api.post("/api/pets/petWithOwner", body)
       .subscribe(
         () => {
           this.router.navigate(['/app/pets'])
-          this._snackBar.open('Pet is added', 'End now', {
+          this._snackBar.open('Pet is added','OK', {
+            duration: 5000,
+            verticalPosition: this.verticalPosition
+          })
+        },  
+        err => {
+          console.log(err);
+          this._snackBar.open('invalid form','OK', {
             duration: 5000,
             verticalPosition: this.verticalPosition
           });
@@ -102,11 +113,10 @@ export class NewPetComponent implements OnInit {
       .subscribe(
         () => {
           this.router.navigate(['/app/pets'])
-          this._snackBar.open('Pet is added', 'End now', {
+          this._snackBar.open('Pet is added','OK', {
             duration: 5000,
             verticalPosition: this.verticalPosition
           });
-          console.log(this.petForm.value);
         }
       )
     }

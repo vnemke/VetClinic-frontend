@@ -1,95 +1,104 @@
-<form [formGroup]="petForm" class="petForm">
-    <div class="container">
-        <div class="row">
+<div class="container g-0">
+    <div class="formcont">
+        <form [formGroup]="petForm">
 
-            <div class="col-12">
-                <div class="field">
-                    <input class="p-invalid" type="text" pInputText placeholder="Name" formControlName="name" [style]="{'width':'250px'}">           
-                    <div *ngIf="petForm.controls['name'].invalid && petForm.controls['name'].dirty">
-                        <small *ngIf="petForm.controls['name'].errors?.required" class="p-error">Name is required</small>
-                    </div> 
-                </div>
-            </div>
-            
-            <div class="col-12">
-                <div class="radio-buttons">
-                    <div class="p-field-radiobutton">
-                        <p-radioButton class="radio" name="sex" value="female" formControlName="sex"></p-radioButton>
-                        <label for="female">Female</label>
-                    </div>
-                    <div class="p-field-radiobutton" >
-                        <p-radioButton class="radio" name="sex" value="male" formControlName="sex"></p-radioButton>
-                        <label for="male">Male</label>
-                    </div>
+            <div class="margin-b-10">
+                <input class="p-invalid" type="text" pInputText placeholder="Name" formControlName="name">
+                <div *ngIf="petForm.controls['name'].invalid && petForm.controls['name'].dirty">
+                    <small *ngIf="petForm.controls['name'].errors?.required" class="p-error">Name is
+                        required</small>
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="field">
-                    <p-calendar view="month" dateFormat="mm/yy" [yearNavigator]="true" yearRange="2000:2030" formControlName="year" [style]="{'width':'250px'}"
-                    value="{{ pet.year | date: 'MM/yyyy' }}"></p-calendar>
-                    <div *ngIf="petForm.controls['year'].invalid && petForm.controls['year'].dirty">
-                        <small *ngIf="petForm.controls['year'].errors?.required" class="p-error">Year is required</small>
-                    </div> 
+            <div class="margin-b-10">
+                <div class="d-flex align-items-center">
+                    <p-radioButton class="radio" name="sex" value="female" formControlName="sex">
+                    </p-radioButton>
+                    <label for="female">Female</label>
+                </div>
+
+                <div class="d-flex align-items-center">
+                    <p-radioButton class="radio" name="sex" value="male" formControlName="sex"></p-radioButton>
+                    <label for="male">Male</label>
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="field">
-                    <p-dropdown [options]="animals" formControlName="animalId" optionValue="id" placeholder="Animal" optionLabel="name" [style]="{'width':'250px'}" [showClear]="true" >
-                        <ng-template let-animal>
-                            <div class="p-d-flex p-ai-center">
-                                <div>{{animal.name}}</div>
-                            </div>
-                        </ng-template>
-                    </p-dropdown>
-                    <div *ngIf="petForm.controls['animalId'].invalid && petForm.controls['animalId'].dirty">
-                        <small *ngIf="petForm.controls['animalId'].errors?.required" class="p-error">Animal is required</small>
-                    </div> 
+            <div class="margin-b-10">
+                <p-calendar dateFormat="dd/mm/yy" formControlName="year" [showIcon]="true" placeholder="Year">
+                </p-calendar>
+                <div *ngIf="petForm.controls['year'].invalid && petForm.controls['year'].dirty">
+                    <small *ngIf="petForm.controls['year'].errors?.required" class="p-error">Year is
+                        required</small>
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="field">
-                    <p-dropdown [options]="filteredRaces" formControlName="raceId" optionValue="id" placeholder="Race" optionLabel="name" [style]="{'width':'250px'}" [disabled]="!selectedAnimal" [showClear]="true">
-                        <ng-template let-race>
-                            <div class="p-d-flex p-ai-center">
-                                <div>{{race.name}}</div>
-                            </div>
-                        </ng-template>
-                    </p-dropdown>
-                    <div *ngIf="petForm.controls['raceId'].invalid && petForm.controls['raceId'].dirty">
-                        <small *ngIf="petForm.controls['raceId'].errors?.required" class="p-error">Race is required</small>
-                    </div> 
+            <div class="margin-b-10">
+
+                <p-dropdown [options]="animals" formControlName="animalId" optionValue="id" placeholder="Animal"
+                    optionLabel="name" [showClear]="true">
+                    <ng-template let-animal>
+                        <div class="p-d-flex p-ai-center">
+                            <div>{{animal.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <div *ngIf="petForm.controls['animalId'].invalid && petForm.controls['animalId'].dirty">
+                    <small *ngIf="petForm.controls['animalId'].errors?.required" class="p-error">Animal is
+                        required</small>
+                </div>
+
+            </div>
+
+            <div class="margin-b-10">
+                <p-dropdown [options]="filteredRaces" formControlName="raceId" optionValue="id" placeholder="Race"
+                    optionLabel="name" [showClear]="true">
+                    <ng-template let-race>
+                        <div class="p-d-flex p-ai-center">
+                            <div>{{race.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <div *ngIf="petForm.controls['raceId'].invalid && petForm.controls['raceId'].dirty">
+                    <small *ngIf="petForm.controls['raceId'].errors?.required" class="p-error">Race is
+                        required</small>
                 </div>
             </div>
 
-            <div class="col-12">
-                <div class="field">
-                    <p-dropdown [options]="owners" formControlName="ownerId" optionValue="id" placeholder="Onwer" optionLabel="fullName" [style]="{'width':'250px'}" [showClear]="true">
-                        <ng-template let-owner>
-                            <div class="p-d-flex p-ai-center">
-                                <div>{{owner.name}}</div>
-                            </div>
-                        </ng-template>
-                    </p-dropdown>
-                    <div *ngIf="petForm.controls['ownerId'].invalid && petForm.controls['ownerId'].dirty">
-                        <small *ngIf="petForm.controls['ownerId'].errors?.required" class="p-error">Owner is required</small>
-                    </div> 
+            <div class="margin-b-10">
+                <p-dropdown [options]="owners" formControlName="ownerId" optionValue="id" placeholder="Onwer"
+                    optionLabel="fullName" [showClear]="true">
+                    <ng-template let-owner>
+                        <div class="p-d-flex p-ai-center">
+                            <div>{{owner.name}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <div *ngIf="petForm.controls['ownerId'].invalid && petForm.controls['ownerId'].dirty">
+                    <small *ngIf="petForm.controls['ownerId'].errors?.required" class="p-error">Owner is
+                        required</small>
                 </div>
             </div>
 
-            <div class="col-12">
-                <button pButton type="button" class="p-button-sm" (click)="onEditPet()" [disabled]="!petForm.valid">Edit</button>
-                <button pButton type="button" class="p-button-sm p-button-secondary" (click)="onDeletePetModal(pet)">Delete</button>
+            <div class="row g-0 justify-content-center margin-t-10 margin-b-10">
+                <div class="col-auto">
+                    <button pButton type="button" class="p-button-sm margin-r-10" (click)="onEditPet()"
+                        [disabled]="!petForm.valid">Edit
+                    </button>
+                    <button pButton type="button" class="p-button-sm p-button-secondary"
+                        (click)="onDeletePetModal(pet)">Delete</button>
+                </div>
             </div>
-            <br>
-            <div class="col-12">
-                <button _ngcontent-ufx-c54="" pbutton="" pripple="" type="button" icon="pi pi-times" 
-                class="p-button-rounded p-button- p-button-text p-ripple p-button p-component p-button-icon-only" (click)="onCancel()">
-                <span class="p-button-icon pi pi-times" aria-hidden="true"></span><span aria-hidden="true" class="p-button-label">
-                &nbsp;</span><span class="p-ink" style="height: 33px; width: 33px; top: 2.51562px; left: 3.59375px;"></span></button>
+
+            <div class="row g-0 justify-content-center">
+                <div class="col-auto">
+                    <button type="button" icon="pi pi-times"
+                        class="p-button-rounded  p-button-text p-button p-button-icon-only" (click)="onCancel()">
+                        <span class="p-button-icon pi pi-times"></span>
+                    </button>
+                </div>
             </div>
-        </div>
-    </div>       
-</form>
+
+        </form>
+    </div>
+
+</div>

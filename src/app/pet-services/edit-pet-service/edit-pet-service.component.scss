@@ -1,22 +1,58 @@
-.petServiceForm { 
-    margin-top: 1.5rem;
+.formcont {
+    margin: 0 auto;
+    max-width: 450px;
 }
 
-.col-12 {
-    display: flex;
-    justify-content: center;
-    padding: 0.6em;
+.header {
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 10px
 }
 
-.p-button-sm {
-    margin: 0.3rem
+.radio {
+    margin: 0.4rem;
 }
+
+.margin-t-10 {
+    margin-top: 10px;
+}
+
+.margin-b-5 {
+    margin-bottom: 5px;
+}
+
+.margin-b-10 {
+    margin-bottom: 10px;
+}
+
+.margin-r-10 {
+    margin-right: 10px;
+}
+
+.align-cnt {
+    text-align: center;
+}
+
+.p-inputtext {
+    width: 100% !important;
+}
+
+.p-inputtext {
+    width: 100% !important;
+}
+
+p-dropdown ::ng-deep .p-component {
+   width: 100% !important;
+}
+
+
+::ng-deep .p-calendar {
+    width: 100% !important;
+}
+
 
 @media only screen and (max-width: 670px) { 
-    .petServiceForm {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        align-items: center;
+    .formcont {
+        padding-left: .5rem;
     }
 }

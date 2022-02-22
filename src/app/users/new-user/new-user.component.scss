@@ -1,28 +1,38 @@
-.userForm {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
+.formcont {
+    margin: 0 auto;
+    max-width: 450px;
 }
 
-.field-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: .75rem;
+.margin-t-10 {
+    margin-top: 10px;
 }
 
-.buttons-field {
-    display: flex;
-    justify-content: center;
-    padding: .75rem;
+.margin-b-5 {
+    margin-bottom: 5px;
 }
 
-.field {
-    display: flex;
-    flex-direction: column;
+.margin-b-10 {
+    margin-bottom: 10px;
 }
 
-.p-button-sm {
-    margin: 0.2rem
+.margin-r-10 {
+    margin-right: 10px;
+}
+
+.p-inputtext {
+    width: 100% !important;
+}
+
+p-dropdown ::ng-deep .p-component {
+    width: 100% !important;
+}
+  
+::ng-deep .p-multiselect {
+     width: 100% !important;
+}
+
+@media only screen and (max-width: 670px) { 
+    .formcont {
+        padding-left: .5rem;
+    }
 }
